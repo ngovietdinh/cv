@@ -614,8 +614,8 @@ footer { border-top:1px solid var(--border2); padding:36px 0; text-align:center;
       <div class="sys-line"><span class="sys-dot"></span><span data-en="SYSTEM ONLINE · PROFILE LOADED · VN-CENTRAL-NODE" data-vi="HỆ THỐNG HOẠT ĐỘNG · HỒ SƠ ĐÃ TẢI · VN-TRUNG-NODE">SYSTEM ONLINE · PROFILE LOADED · VN-CENTRAL-NODE</span></div>
 
       <div class="hero-name">
-        <span class="name-l1">NGO VIET</span>
-        <span class="name-l2" data-text="DINH">DINH</span>
+        <span class="name-l1">NGÔ VIẾT</span>
+        <span class="name-l2" data-text="DINH">ĐỊNH</span>
       </div>
 
       <div class="hero-title">
@@ -650,84 +650,25 @@ footer { border-top:1px solid var(--border2); padding:36px 0; text-align:center;
         <div class="avatar-inner">
           <!-- SVG Avatar -->
           <svg class="avatar-svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="bgGrad" cx="50%" cy="50%">
-                <stop offset="0%" stop-color="#0a1e3d"/>
-                <stop offset="100%" stop-color="#050d1a"/>
-              </radialGradient>
-              <radialGradient id="skinGrad" cx="50%" cy="40%">
-                <stop offset="0%" stop-color="#f5c9a0"/>
-                <stop offset="100%" stop-color="#d4956a"/>
-              </radialGradient>
-              <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#071a38"/>
-                <stop offset="100%" stop-color="#0a2550"/>
-              </linearGradient>
-              <linearGradient id="collarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#00e5ff"/>
-                <stop offset="100%" stop-color="#0088cc"/>
-              </linearGradient>
-              <filter id="glow2">
-                <feGaussianBlur stdDeviation="3" result="blur"/>
-                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-            </defs>
-            <!-- Background -->
-            <rect width="248" height="248" fill="url(#bgGrad)"/>
-            <!-- Grid lines subtle -->
-            <line x1="0" y1="124" x2="248" y2="124" stroke="rgba(0,229,255,0.05)" stroke-width="1"/>
-            <line x1="124" y1="0" x2="124" y2="248" stroke="rgba(0,229,255,0.05)" stroke-width="1"/>
-            <!-- Glow circle behind head -->
-            <circle cx="124" cy="95" r="58" fill="none" stroke="rgba(0,229,255,0.08)" stroke-width="20"/>
-            <!-- Shirt / body -->
-            <path d="M60 248 Q60 170 124 160 Q188 170 188 248 Z" fill="url(#shirtGrad)"/>
-            <!-- Collar/tie detail -->
-            <path d="M112 165 L124 210 L136 165 Q130 158 124 160 Q118 158 112 165Z" fill="url(#collarGrad)" opacity=".8"/>
-            <rect x="121" y="175" width="6" height="40" rx="3" fill="rgba(0,229,255,0.4)"/>
-            <!-- Shirt collar -->
-            <path d="M105 163 Q124 155 143 163 L136 175 L124 168 L112 175Z" fill="#0d2a55"/>
-            <!-- Neck -->
-            <rect x="112" y="135" width="24" height="30" rx="12" fill="url(#skinGrad)"/>
-            <!-- Head -->
-            <ellipse cx="124" cy="108" rx="46" ry="50" fill="url(#skinGrad)"/>
-            <!-- Hair -->
-            <path d="M78 95 Q80 55 124 52 Q168 55 170 95 Q166 70 158 65 Q140 55 124 56 Q108 55 90 65 Q82 70 78 95Z" fill="#2d1a0e"/>
-            <!-- Hair detail -->
-            <path d="M78 90 Q80 72 90 63" stroke="#3d2410" stroke-width="2" fill="none" opacity=".6"/>
-            <path d="M170 90 Q168 72 158 63" stroke="#3d2410" stroke-width="2" fill="none" opacity=".6"/>
-            <!-- Eyes -->
-            <ellipse cx="107" cy="108" rx="8" ry="9" fill="#fff"/>
-            <ellipse cx="141" cy="108" rx="8" ry="9" fill="#fff"/>
-            <circle cx="109" cy="109" r="5.5" fill="#2a1505"/>
-            <circle cx="143" cy="109" r="5.5" fill="#2a1505"/>
-            <circle cx="111" cy="107" r="2" fill="#1a0d02"/>
-            <circle cx="145" cy="107" r="2" fill="#1a0d02"/>
-            <!-- Eye shine -->
-            <circle cx="112" cy="106" r="1.5" fill="white" opacity=".9"/>
-            <circle cx="146" cy="106" r="1.5" fill="white" opacity=".9"/>
-            <!-- Eyebrows -->
-            <path d="M98 97 Q107 93 116 96" stroke="#2d1a0e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <path d="M132 96 Q141 93 150 97" stroke="#2d1a0e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <!-- Nose -->
-            <path d="M120 115 Q124 122 128 115" stroke="#b07850" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <!-- Mouth / slight smile -->
-            <path d="M113 130 Q124 138 135 130" stroke="#b07850" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <!-- Ears -->
-            <ellipse cx="78" cy="110" rx="6" ry="8" fill="url(#skinGrad)"/>
-            <ellipse cx="170" cy="110" rx="6" ry="8" fill="url(#skinGrad)"/>
-            <!-- HUD decorations -->
-            <rect x="8" y="8" width="30" height="2" fill="rgba(0,229,255,0.4)"/>
-            <rect x="8" y="8" width="2" height="30" fill="rgba(0,229,255,0.4)"/>
-            <rect x="210" y="8" width="30" height="2" fill="rgba(0,229,255,0.4)"/>
-            <rect x="238" y="8" width="2" height="30" fill="rgba(0,229,255,0.4)"/>
-            <rect x="8" y="238" width="30" height="2" fill="rgba(0,229,255,0.4)"/>
-            <rect x="8" y="210" width="2" height="30" fill="rgba(0,229,255,0.4)"/>
-            <rect x="210" y="238" width="30" height="2" fill="rgba(0,229,255,0.4)"/>
-            <rect x="238" y="210" width="2" height="30" fill="rgba(0,229,255,0.4)"/>
-            <!-- Name tag on shirt -->
-            <rect x="100" y="193" width="48" height="18" rx="2" fill="rgba(0,229,255,0.1)" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
-            <text x="124" y="206" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="#00e5ff" letter-spacing="1">IoT ENGINEER</text>
-          </svg>
+  
+  <defs>
+    <clipPath id="avatarClip">
+      <circle cx="124" cy="124" r="124"></circle>
+    </clipPath>
+  </defs>
+
+  <!-- Ảnh avatar -->
+  <image 
+    href="avatar.jpg"
+    x="0"
+    y="0"
+    width="248"
+    height="248"
+    clip-path="url(#avatarClip)"
+    preserveAspectRatio="xMidYMid slice"
+  />
+
+</svg>
         </div>
         <div class="avatar-status"></div>
       </div>
