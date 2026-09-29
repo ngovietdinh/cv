@@ -1,1481 +1,936 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NGO VIET DINH — CV</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>Ngô Viết Định — IoT / SCADA Engineer</title>
+<meta name="description" content="Ngô Viết Định — Senior IoT / SCADA Engineer & Solution Architect. 7+ years, 500+ monitoring stations, 150+ factories.">
+<meta name="theme-color" content="#0c0c0b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Fraunces:ital,opsz,wght@1,9..144,300..600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #050d1a;
-  --bg2: #071223;
-  --surface: rgba(8,22,45,0.85);
-  --surface2: rgba(12,30,60,0.6);
-  --cyan: #00e5ff;
-  --cyan2: #40f0ff;
-  --cyan-dim: rgba(0,229,255,0.12);
-  --cyan-border: rgba(0,229,255,0.25);
-  --green: #00ffb3;
-  --purple: #a855f7;
-  --orange: #ff9d00;
-  --text: #f0f8ff;
-  --text2: #9ecde8;
-  --text3: #4a7a9b;
-  --border: rgba(0,229,255,0.2);
-  --border2: rgba(0,229,255,0.08);
-  --glow: 0 0 30px rgba(0,229,255,0.15);
-  --font-d: 'Syne', sans-serif;
-  --font-m: 'Space Mono', monospace;
+/* ═════════════ TOKENS ═════════════ */
+:root{
+  --bg:#0c0c0b; --bg2:#151513; --bg3:#1d1d1a;
+  --ink:#f1ece2; --muted:#8f897e; --faint:#57534b;
+  --line:rgba(241,236,226,.12); --line2:rgba(241,236,226,.06);
+  --acc:#ff5b1f; --acc-ink:#0c0c0b; --live:#c8ff2e;
+  --f-d:'Bricolage Grotesque',system-ui,sans-serif;
+  --f-s:'Fraunces',Georgia,serif;
+  --f-m:'JetBrains Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gut:clamp(16px,4vw,56px);
+}
+:root[data-theme="light"]{
+  --bg:#efe9dd; --bg2:#e7e0d2; --bg3:#ddd5c5;
+  --ink:#121210; --muted:#6a655b; --faint:#a39d90;
+  --line:rgba(18,18,16,.14); --line2:rgba(18,18,16,.07);
+  --acc:#f04a0c; --acc-ink:#fff; --live:#2f8a1c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-d);font-size:16px;line-height:1.5;overflow-x:hidden;transition:background .6s var(--ease),color .6s var(--ease)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img,svg{display:block}
+::selection{background:var(--acc);color:var(--acc-ink)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:4px}
+.mono{font-family:var(--f-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.serif{font-family:var(--f-s);font-style:italic;font-weight:400}
+.acc{color:var(--acc)}
+
+/* grain */
+.grain{position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-6%,4%)}40%{transform:translate(4%,-8%)}60%{transform:translate(-9%,2%)}80%{transform:translate(7%,6%)}100%{transform:translate(0,0)}}
+
+/* ═════════════ LOADER ═════════════ */
+.loader{position:fixed;inset:0;z-index:200;display:grid;grid-template-rows:1fr auto;padding:var(--gut);background:var(--bg);pointer-events:all}
+.loader-top{display:flex;justify-content:space-between;align-items:flex-start}
+.loader-num{font-size:clamp(90px,22vw,320px);font-weight:700;line-height:.8;letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.loader-bar{height:2px;background:var(--line);margin-top:24px;overflow:hidden}
+.loader-bar i{display:block;height:100%;width:0;background:var(--acc)}
+.loader.done{clip-path:inset(0 0 100% 0);transition:clip-path 1.1s var(--ease) .1s}
+.loader.gone{display:none}
+
+/* ═════════════ CURSOR ═════════════ */
+.cur,.cur-f{position:fixed;left:0;top:0;pointer-events:none;z-index:150;border-radius:50%}
+.cur{width:8px;height:8px;background:var(--acc);margin:-4px 0 0 -4px}
+.cur-f{width:44px;height:44px;margin:-22px 0 0 -22px;border:1px solid var(--ink);opacity:.35;display:grid;place-items:center;transition:width .4s var(--ease),height .4s var(--ease),margin .4s var(--ease),opacity .3s,background .3s,border-color .3s}
+.cur-f span{font-family:var(--f-m);font-size:10px;letter-spacing:.12em;color:var(--acc-ink);opacity:0;transition:opacity .2s;white-space:nowrap}
+.cur-f.hov{width:78px;height:78px;margin:-39px 0 0 -39px;opacity:1;background:var(--acc);border-color:var(--acc)}
+.cur-f.hov span{opacity:1}
+.cur-f.lnk{width:64px;height:64px;margin:-32px 0 0 -32px;opacity:.9;border-color:var(--acc)}
+@media (hover:none),(pointer:coarse){.cur,.cur-f{display:none}}
+@media (hover:hover) and (pointer:fine){body.has-cur,body.has-cur a,body.has-cur button{cursor:none}}
+
+/* ═════════════ TOP UI ═════════════ */
+.prog{position:fixed;top:0;left:0;height:2px;width:100%;z-index:120;background:var(--acc);transform-origin:0 50%;transform:scaleX(0)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px var(--gut);transition:transform .5s var(--ease),background .4s}
+.nav.hide{transform:translateY(-110%)}
+.nav.solid{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border-bottom:1px solid var(--line2)}
+.logo{font-weight:800;font-size:18px;letter-spacing:-.04em;display:flex;align-items:center;gap:8px}
+.logo b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--acc);color:var(--acc-ink);font-size:13px;transition:transform .6s var(--ease)}
+.logo:hover b{transform:rotate(360deg)}
+.nav-links{display:flex;gap:4px;padding:5px;border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--bg2) 60%,transparent)}
+.nav-links a{position:relative;padding:7px 14px;border-radius:999px;font-family:var(--f-m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.on{color:var(--acc-ink)}
+.nav-pill{position:absolute;top:5px;bottom:5px;left:0;width:0;border-radius:999px;background:var(--acc);transition:left .5s var(--ease),width .5s var(--ease),opacity .3s;opacity:0;z-index:-1}
+.nav-links{position:relative;isolation:isolate}
+.nav-r{display:flex;align-items:center;gap:10px}
+.clock{color:var(--muted);white-space:nowrap}
+.clock b{color:var(--ink);font-weight:500}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;position:relative;isolation:isolate}
+.seg button{position:relative;z-index:1;padding:6px 11px;font-family:var(--f-m);font-size:11px;letter-spacing:.1em;color:var(--muted);transition:color .3s}
+.seg button.on{color:var(--acc-ink)}
+.seg::before{content:"";position:absolute;z-index:0;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:999px;background:var(--ink);transition:transform .5s var(--ease)}
+.seg[data-v="vi"]::before{transform:translateX(100%)}
+.seg button.on{color:var(--bg)}
+.ibtn{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;transition:border-color .3s,transform .5s var(--ease)}
+.ibtn:hover{border-color:var(--acc);transform:rotate(180deg)}
+.ibtn svg{width:16px;height:16px}
+@media (max-width:1080px){.nav-links{display:none}}
+@media (max-width:640px){.clock{display:none}}
+
+/* ═════════════ LAYOUT ═════════════ */
+.wrap{padding:0 var(--gut);max-width:1600px;margin:0 auto}
+section{position:relative}
+.kicker{display:flex;align-items:center;gap:14px;color:var(--muted);margin-bottom:clamp(28px,5vw,64px)}
+.kicker .n{color:var(--acc)}
+.kicker .ln{flex:1;height:1px;background:var(--line);transform-origin:0 50%;transform:scaleX(0);transition:transform 1.4s var(--ease) .2s}
+.in .kicker .ln,.kicker.in .ln{transform:scaleX(1)}
+.h2{font-size:clamp(44px,8.4vw,136px);font-weight:700;letter-spacing:-.055em;line-height:.9}
+.h2 .serif{letter-spacing:-.03em;font-weight:300}
+.sec{padding-top:clamp(90px,14vw,200px);padding-bottom:clamp(90px,14vw,200px)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1.2s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.mask{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+.mask>span{display:inline-block;transform:translateY(105%);transition:transform 1.2s var(--ease)}
+.in .mask>span,.mask.in>span{transform:none}
+
+/* ═════════════ HERO ═════════════ */
+.hero{min-height:100svh;display:grid;grid-template-rows:auto 1fr auto;padding:100px var(--gut) 28px;position:relative;overflow:hidden}
+#wave{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero>*{position:relative;z-index:1}
+.hero-meta{display:flex;justify-content:space-between;gap:20px;color:var(--muted);flex-wrap:wrap}
+.live{display:inline-flex;align-items:center;gap:8px;color:var(--ink)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 var(--live);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--live) 70%,transparent)}100%{box-shadow:0 0 0 12px transparent}}
+.hero-mid{display:grid;grid-template-columns:1fr auto;align-items:end;gap:clamp(20px,4vw,60px);padding:clamp(30px,6vh,70px) 0 clamp(44px,8vh,80px)}
+.name{font-weight:800;letter-spacing:-.065em;line-height:.86;padding-bottom:.1em;font-size:clamp(64px,15.5vw,250px);user-select:none}
+.name .l1{display:block;font-family:var(--f-s);font-style:italic;font-weight:300;letter-spacing:-.04em;font-size:.52em;line-height:1;margin-bottom:.04em;padding-left:.08em}
+.name .l2{display:block;white-space:nowrap}
+.ch{display:inline-block;transform:translateY(110%) rotate(8deg);opacity:0;transition:transform 1.3s var(--ease),opacity 1s var(--ease),color .3s}
+.ready .ch{transform:none;opacity:1}
+.name .l2 .ch:hover{color:var(--acc);transition:transform .5s var(--ease),color .2s;transform:translateY(-6%) skewX(-6deg)}
+.name .dot{color:var(--acc)}
+.portrait{position:relative;width:clamp(180px,22vw,320px);aspect-ratio:3/4;flex-shrink:0;margin-bottom:.6vw}
+.portrait-img{position:absolute;inset:0;border-radius:999px 999px 18px 18px;overflow:hidden;clip-path:inset(100% 0 0 0 round 999px 999px 18px 18px);transition:clip-path 1.6s var(--ease) .5s;background:var(--bg3)}
+.ready .portrait-img{clip-path:inset(0 0 0 0 round 999px 999px 18px 18px)}
+.portrait-img img{width:100%;height:100%;object-fit:cover;object-position:40% 22%;transform:scale(1.25);filter:grayscale(1) contrast(1.08);transition:transform 1.8s var(--ease),filter .8s}
+.ready .portrait-img img{transform:scale(1.02)}
+.portrait:hover .portrait-img img{filter:grayscale(0) contrast(1);transform:scale(1.08)}
+.portrait-img::after{content:"";position:absolute;left:0;right:0;height:30%;top:-30%;background:linear-gradient(transparent,color-mix(in srgb,var(--acc) 35%,transparent),transparent);mix-blend-mode:screen;animation:scan 4.5s var(--ease) infinite 2s}
+@keyframes scan{0%{top:-30%}60%,100%{top:110%}}
+.badge{position:absolute;left:-46px;bottom:12%;width:112px;height:112px;z-index:2;opacity:0;transform:scale(.6) rotate(-40deg);transition:opacity .8s var(--ease) 1.2s,transform 1.2s var(--ease) 1.2s}
+.ready .badge{opacity:1;transform:none}
+.badge-in{position:absolute;inset:0;border-radius:50%;background:var(--acc);color:var(--acc-ink)}
+.badge svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 14s linear infinite}
+.badge text{font-family:var(--f-m);font-size:9.6px;letter-spacing:.2em;fill:currentColor;text-transform:uppercase}
+.badge .ctr{position:absolute;inset:0;display:grid;place-items:center;font-size:26px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-bot{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(20px,4vw,60px);align-items:end;border-top:1px solid var(--line);padding-top:22px}
+.role{font-size:clamp(20px,2.3vw,34px);line-height:1.1;letter-spacing:-.03em;font-weight:500;max-width:22ch}
+.role .serif{color:var(--acc)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat .v{font-size:clamp(28px,3.4vw,52px);font-weight:700;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.stat .v sup{font-size:.45em;color:var(--acc);vertical-align:top;margin-left:2px}
+.stat .k{color:var(--muted);margin-top:6px;font-size:10px}
+@media (max-width:900px){
+  .hero-mid{grid-template-columns:1fr;justify-items:start}
+  .portrait{order:-1;width:min(56vw,240px)}
+  .badge{left:auto;right:-40px;width:96px;height:96px}
+  .hero-bot{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr);row-gap:20px}
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
+/* ═════════════ MARQUEE ═════════════ */
+.mq{border-block:1px solid var(--line);overflow:hidden;padding:18px 0;display:grid;gap:8px}
+.mq-row{display:flex;width:max-content;will-change:transform}
+.mq-row span{font-size:clamp(34px,5.6vw,86px);font-weight:700;letter-spacing:-.05em;line-height:1;padding-right:.5em;white-space:nowrap;display:flex;align-items:center;gap:.5em}
+.mq-row span::after{content:"";width:.28em;height:.28em;background:var(--acc);border-radius:50%;flex-shrink:0}
+.mq-row.b span{-webkit-text-stroke:1px var(--ink);color:transparent;font-family:var(--f-s);font-style:italic;font-weight:300;letter-spacing:-.03em}
+.mq-row.b span::after{border-radius:0;transform:rotate(45deg);background:transparent;border:1px solid var(--acc)}
 
-body {
-  font-family: var(--font-d);
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  cursor: none;
-}
+/* ═════════════ PROFILE ═════════════ */
+.about-grid{display:grid;grid-template-columns:minmax(200px,.36fr) 1fr;gap:clamp(24px,5vw,80px)}
+.about-side{display:flex;flex-direction:column;gap:14px;align-self:start;position:sticky;top:110px}
+.chip-l{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+.chip-l b{color:var(--ink);font-weight:500;text-transform:none;letter-spacing:0;font-family:var(--f-d);font-size:15px;text-align:right}
+.scrub{font-size:clamp(26px,3.5vw,54px);line-height:1.12;letter-spacing:-.035em;font-weight:500}
+.scrub .w{opacity:.14;transition:opacity .35s,color .35s}
+.scrub .w.lit{opacity:1}
+.scrub strong .w.lit,.scrub .hi .w.lit{color:var(--acc)}
+.scrub strong{font-weight:500}
+.scrub .hi{font-family:var(--f-s);font-style:italic;font-weight:300}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr}.about-side{position:static;order:2}}
 
-/* ── CURSOR ── */
-.cursor { position:fixed; width:10px; height:10px; background:var(--cyan); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:screen; box-shadow:0 0 16px var(--cyan),0 0 40px rgba(0,229,255,0.4); transition:width .2s,height .2s; }
-.cursor-ring { position:fixed; width:32px; height:32px; border:1.5px solid rgba(0,229,255,0.6); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .15s,height .15s; }
+/* ═════════════ STACK ═════════════ */
+.stack-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:clamp(40px,6vw,80px);flex-wrap:wrap}
+.stack-head p{max-width:34ch;color:var(--muted)}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.cell{--mx:50%;--my:50%;position:relative;min-height:260px;padding:26px;border:1px solid var(--line);border-radius:22px;background:var(--bg2);overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;transform-style:preserve-3d;transition:transform .6s var(--ease),border-color .4s}
+.cell:nth-child(1),.cell:nth-child(6){grid-column:span 2}
+.cell::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx) var(--my),color-mix(in srgb,var(--acc) 20%,transparent),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
+.cell:hover{border-color:color-mix(in srgb,var(--acc) 50%,transparent)}
+.cell:hover::before{opacity:1}
+.cell-top{display:flex;justify-content:space-between;align-items:flex-start;color:var(--muted)}
+.cell-ic{width:46px;height:46px;border-radius:14px;border:1px solid var(--line);display:grid;place-items:center;color:var(--acc);transition:transform .6s var(--ease),background .3s,color .3s}
+.cell:hover .cell-ic{transform:rotate(-12deg) scale(1.08);background:var(--acc);color:var(--acc-ink)}
+.cell-ic svg{width:22px;height:22px}
+.cell h3{font-size:clamp(24px,2.4vw,36px);letter-spacing:-.04em;line-height:1;font-weight:600;margin:30px 0 18px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--f-m);font-size:11.5px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;color:var(--ink);transition:background .25s,color .25s,border-color .25s,transform .35s var(--ease)}
+.tag:hover{background:var(--ink);color:var(--bg);transform:translateY(-3px)}
+@media (max-width:1000px){.bento{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.bento{grid-template-columns:1fr}.cell,.cell:nth-child(1),.cell:nth-child(6){grid-column:auto;min-height:0}}
 
-/* ── CANVAS ── */
-#bgCanvas { position:fixed; inset:0; z-index:0; }
-.scanlines { position:fixed; inset:0; z-index:1; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,229,255,0.012) 2px,rgba(0,229,255,0.012) 4px); pointer-events:none; }
-
-/* ── LANG TOGGLE ── */
-.lang-bar {
-  position: fixed;
-  top: 20px; right: 24px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  background: rgba(5,13,26,0.9);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-  backdrop-filter: blur(20px);
-  box-shadow: var(--glow);
-}
-.lang-btn {
-  padding: 8px 18px;
-  font-family: var(--font-m);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--text3);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: all 0.25s;
-  position: relative;
-}
-.lang-btn.active {
-  color: var(--bg);
-  background: var(--cyan);
-}
-.lang-btn:not(.active):hover { color: var(--cyan); }
-
-/* ── WRAP ── */
-.wrap { position:relative; z-index:10; max-width:1140px; margin:0 auto; padding:0 32px; }
-
-/* ── HEADER ── */
-header {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 100px 0 60px;
-  position: relative;
-}
-
-.header-grid {
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 60px;
-  align-items: center;
-  width: 100%;
-}
-
-/* ── AVATAR AREA ── */
-.avatar-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  position: relative;
+/* ═════════════ EXPERIENCE (horizontal) ═════════════ */
+.hs{background:var(--ink);color:var(--bg);border-radius:clamp(20px,3vw,44px);margin:0 clamp(6px,1vw,14px)}
+.hs ::selection{background:var(--acc)}
+.hs-sticky{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:90px 0 40px}
+.hs .kicker{color:color-mix(in srgb,var(--bg) 60%,transparent);padding:0 var(--gut);margin-bottom:28px}
+.hs .kicker .ln{background:color-mix(in srgb,var(--bg) 25%,transparent)}
+.hs-track{display:flex;gap:clamp(16px,2vw,28px);padding:0 var(--gut);will-change:transform;width:max-content}
+.hs-intro{width:min(44vw,560px);flex-shrink:0;display:flex;flex-direction:column;justify-content:space-between}
+.hs-intro p{color:color-mix(in srgb,var(--bg) 62%,transparent);max-width:30ch;margin-top:24px}
+.hs-hint{display:flex;align-items:center;gap:12px;margin-top:40px;color:var(--acc)}
+.hs-hint svg{width:48px;animation:nudge 1.8s var(--ease) infinite}
+@keyframes nudge{50%{transform:translateX(10px)}}
+.job{width:min(62vw,820px);flex-shrink:0;border:1px solid color-mix(in srgb,var(--bg) 16%,transparent);border-radius:26px;padding:clamp(22px,2.6vw,40px);display:grid;grid-template-rows:auto auto 1fr auto;gap:18px;position:relative;overflow:hidden;background:color-mix(in srgb,var(--bg) 4%,transparent)}
+.job-yr{font-size:clamp(70px,9vw,150px);font-weight:800;letter-spacing:-.07em;line-height:.8;color:transparent;-webkit-text-stroke:1.2px color-mix(in srgb,var(--bg) 40%,transparent);position:absolute;right:-.04em;top:.12em;pointer-events:none;transition:-webkit-text-stroke-color .5s}
+.job:hover .job-yr{-webkit-text-stroke-color:var(--acc)}
+.job-top{display:flex;gap:12px;align-items:center;color:var(--acc)}
+.job-top .per{padding:5px 10px;border:1px solid var(--acc);border-radius:999px}
+.job h3{font-size:clamp(30px,3.6vw,58px);letter-spacing:-.05em;line-height:.95;font-weight:700;max-width:12ch}
+.job .co{color:color-mix(in srgb,var(--bg) 58%,transparent);margin-top:10px}
+.job-cols{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(18px,2.4vw,36px);align-content:start}
+.job-cols h4{color:color-mix(in srgb,var(--bg) 50%,transparent);margin-bottom:10px;font-weight:400}
+.job-cols ul{list-style:none;display:grid;gap:8px;font-size:clamp(14px,1.05vw,16px);line-height:1.4}
+.job-cols li{display:grid;grid-template-columns:14px 1fr;gap:8px}
+.job-cols li::before{content:"";width:6px;height:6px;margin-top:.55em;background:currentColor;opacity:.4;border-radius:50%}
+.job-cols .imp li::before{background:var(--acc);opacity:1;border-radius:0;transform:rotate(45deg)}
+.job .tags .tag{border-color:color-mix(in srgb,var(--bg) 20%,transparent);color:var(--bg)}
+.job .tags .tag:hover{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+.hs-bar{margin:28px var(--gut) 0;height:2px;background:color-mix(in srgb,var(--bg) 14%,transparent);position:relative}
+.hs-bar i{position:absolute;inset:0;background:var(--acc);transform-origin:0 50%;transform:scaleX(0)}
+.hs-count{display:flex;justify-content:space-between;margin:12px var(--gut) 0;color:color-mix(in srgb,var(--bg) 50%,transparent)}
+@media (max-width:900px){
+  .hs-sticky{position:static;height:auto;padding:80px 0 50px}
+  .hs-track{flex-direction:column;width:auto;transform:none!important}
+  .hs-intro,.job{width:auto}
+  .job-cols{grid-template-columns:1fr}
+  .hs-bar,.hs-count,.hs-hint{display:none}
 }
 
-.avatar-ring {
-  position: relative;
-  width: 260px; height: 260px;
-}
+/* ═════════════ PROJECTS ═════════════ */
+.plist{border-top:1px solid var(--line)}
+.prow{position:relative;display:grid;grid-template-columns:70px 1fr auto 60px;align-items:center;gap:20px;width:100%;text-align:left;padding:clamp(22px,3vw,40px) 0;border-bottom:1px solid var(--line);overflow:hidden;isolation:isolate}
+.prow::before{content:"";position:absolute;inset:0;background:var(--acc);transform:scaleY(0);transform-origin:50% 100%;transition:transform .6s var(--ease);z-index:-1}
+.prow:hover::before{transform:scaleY(1)}
+.prow:hover{color:var(--acc-ink)}
+.prow .i{color:var(--muted);transition:color .3s}
+.prow:hover .i,.prow:hover .s{color:var(--acc-ink)}
+.prow .t{font-size:clamp(26px,4.4vw,70px);font-weight:600;letter-spacing:-.05em;line-height:.95;transition:transform .6s var(--ease)}
+.prow:hover .t{transform:translateX(18px)}
+.prow .s{color:var(--muted);text-align:right;transition:color .3s}
+.prow .ar{width:54px;height:54px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center;transition:transform .6s var(--ease)}
+.prow:hover .ar{transform:rotate(-45deg)}
+.prow .ar svg{width:20px}
+@media (max-width:760px){.prow{grid-template-columns:40px 1fr 44px}.prow .s{display:none}.prow .ar{width:40px;height:40px}}
+.pv{position:fixed;left:0;top:0;z-index:60;width:360px;aspect-ratio:16/10;border-radius:18px;overflow:hidden;pointer-events:none;background:var(--bg2);border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.45);opacity:0;transform:scale(.6);transition:opacity .35s,transform .5s var(--ease);margin:-112px 0 0 40px}
+.pv.on{opacity:1;transform:scale(1)}
+.pv-in{position:absolute;inset:0;transition:transform .6s var(--ease)}
+.pv-in>div{height:100%;display:grid;place-items:center;padding:14px}
+@media (hover:none){.pv{display:none}}
+.illo{width:100%;height:auto;color:var(--ink)}
+.illo .a{color:var(--acc)} .illo .m{color:var(--muted)}
+.illo text{font-family:var(--f-m);fill:currentColor}
 
-.avatar-ring::before {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  background: conic-gradient(var(--cyan), var(--purple), var(--green), var(--cyan));
-  animation: spinRing 6s linear infinite;
-}
-.avatar-ring::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: var(--bg);
-}
+/* drawer */
+dialog.dr{margin:0 0 0 auto;height:100svh;max-height:100svh;width:min(720px,100vw);max-width:100vw;border:0;background:var(--bg);color:var(--ink);padding:0;overflow:auto;border-left:1px solid var(--line)}
+dialog.dr::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+dialog.dr[open]{animation:drIn .8s var(--ease)}
+dialog.dr[open]::backdrop{animation:fade .5s}
+dialog.dr.closing{animation:drOut .5s var(--ease) forwards}
+@keyframes drIn{from{transform:translateX(100%)}}
+@keyframes drOut{to{transform:translateX(100%)}}
+@keyframes fade{from{opacity:0}}
+.dr-in{padding:clamp(22px,4vw,48px);display:grid;gap:28px}
+.dr-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+.dr-x{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .5s var(--ease),background .3s,color .3s}
+.dr-x:hover{transform:rotate(90deg);background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+.dr h3{font-size:clamp(36px,5vw,64px);letter-spacing:-.05em;line-height:.92;font-weight:700}
+.dr .fig{border:1px solid var(--line);border-radius:18px;background:var(--bg2);padding:18px}
+.dr h4{color:var(--muted);margin-bottom:12px;font-weight:400}
+.dr ul{list-style:none;display:grid;gap:10px;font-size:17px;line-height:1.45}
+.dr li{display:grid;grid-template-columns:18px 1fr;gap:6px}
+.dr li::before{content:"→";color:var(--acc)}
+.dr .imp li::before{content:"✦"}
 
-@keyframes spinRing {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
+/* ═════════════ AWARDS (sticky stack) ═════════════ */
+.stackc{display:grid;gap:0}
+.award{position:sticky;top:calc(100px + var(--i) * 26px);min-height:clamp(300px,42vh,420px);border-radius:28px;padding:clamp(24px,3.4vw,52px);display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,70px);margin-bottom:clamp(20px,5vh,60px);border:1px solid var(--line);background:var(--bg2);box-shadow:0 -20px 60px rgba(0,0,0,.18);transform-origin:50% 0}
+.award:nth-child(2){background:var(--acc);color:var(--acc-ink);border-color:transparent}
+.award:nth-child(3){background:var(--ink);color:var(--bg);border-color:transparent}
+.award .big{font-size:clamp(80px,13vw,220px);font-weight:800;letter-spacing:-.07em;line-height:.78}
+.award .big small{font-family:var(--f-s);font-style:italic;font-weight:300;font-size:.4em;letter-spacing:-.02em}
+.award h3{font-size:clamp(26px,3vw,46px);letter-spacing:-.04em;line-height:1;font-weight:600;margin:8px 0 10px}
+.award .sub{opacity:.65}
+.award ul{list-style:none;display:grid;gap:10px;margin-top:26px;font-size:clamp(15px,1.15vw,18px);max-width:56ch}
+.award li{display:grid;grid-template-columns:22px 1fr;gap:4px;padding-top:10px;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent)}
+.award li::before{content:"✦";opacity:.7}
+@media (max-width:760px){.award{grid-template-columns:1fr;position:relative;top:auto}}
 
-.avatar-inner {
-  position: absolute;
-  inset: 6px;
-  border-radius: 50%;
-  overflow: hidden;
-  z-index: 2;
-  background: var(--bg2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* ═════════════ EDUCATION ═════════════ */
+.edu{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;padding:clamp(28px,4vw,56px) 0;border-block:1px solid var(--line)}
+.edu h3{font-size:clamp(30px,4.6vw,72px);letter-spacing:-.05em;line-height:.95;font-weight:600}
+.edu p{color:var(--muted);margin-top:16px}
+.edu .yr{font-family:var(--f-s);font-style:italic;font-weight:300;font-size:clamp(40px,6vw,96px);letter-spacing:-.03em;color:var(--acc);line-height:1}
+@media (max-width:700px){.edu{grid-template-columns:1fr}}
 
-/* SVG Avatar placeholder */
-.avatar-svg {
-  width: 100%; height: 100%;
-}
+/* ═════════════ CONTACT ═════════════ */
+.contact{padding-top:clamp(100px,14vw,200px);padding-bottom:40px;text-align:center;overflow:hidden}
+.contact .kicker{justify-content:center}
+.cta{font-size:clamp(56px,13vw,220px);font-weight:800;letter-spacing:-.07em;line-height:.82}
+.cta .serif{font-weight:300;letter-spacing:-.04em;color:var(--acc)}
+.cta-btns{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:clamp(40px,6vw,80px)}
+.btn{position:relative;display:inline-flex;align-items:center;gap:12px;padding:20px 30px;border-radius:999px;border:1px solid var(--line);font-size:clamp(16px,1.4vw,20px);font-weight:500;letter-spacing:-.01em;overflow:hidden;isolation:isolate;transition:color .4s,border-color .4s}
+.btn::before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateY(101%);border-radius:inherit;transition:transform .6s var(--ease);z-index:-1}
+.btn:hover{color:var(--bg);border-color:var(--ink)}
+.btn:hover::before{transform:none}
+.btn.pri{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+.btn svg{width:18px;height:18px}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:clamp(70px,10vw,140px);padding-top:22px;border-top:1px solid var(--line);color:var(--muted);text-align:left}
+.foot button:hover{color:var(--acc)}
+.toast{position:fixed;left:50%;bottom:28px;z-index:130;transform:translate(-50%,calc(100% + 40px));visibility:hidden;background:var(--ink);color:var(--bg);padding:14px 22px;border-radius:999px;transition:transform .6s var(--ease);display:flex;gap:10px;align-items:center}
+.toast.on{transform:translate(-50%,0);visibility:visible}
+.toast i{width:8px;height:8px;border-radius:50%;background:var(--live)}
 
-.avatar-status {
-  position: absolute;
-  bottom: 14px; right: 14px;
-  z-index: 3;
-  width: 28px; height: 28px;
-  background: var(--green);
-  border-radius: 50%;
-  border: 3px solid var(--bg);
-  box-shadow: 0 0 16px var(--green);
-  animation: pulseDot 2s infinite;
-}
-@keyframes pulseDot {
-  0%,100%{box-shadow:0 0 16px var(--green);}
-  50%{box-shadow:0 0 30px var(--green),0 0 60px rgba(0,255,179,0.3);}
-}
+/* magnetic */
+.mag{will-change:transform;transition:transform .6s var(--ease)}
 
-.avatar-badges {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .grain{display:none}
 }
-
-.av-badge {
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-left: 2px solid var(--cyan);
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-m);
-  font-size: 11px;
-  color: var(--text2);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s;
-}
-.av-badge:hover { border-color: var(--border); color: var(--cyan); }
-.av-badge i { color: var(--cyan); width: 16px; text-align:center; }
-.av-badge strong { color: var(--text); }
-
-/* ── HERO TEXT ── */
-.hero-left { position: relative; }
-
-.sys-line {
-  font-family: var(--font-m);
-  font-size: 11px;
-  color: var(--green);
-  letter-spacing: 0.18em;
-  margin-bottom: 28px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  opacity: 0;
-  animation: fadeInUp 0.6s ease 0.2s forwards;
-}
-.sys-dot { width:8px; height:8px; background:var(--green); border-radius:50%; box-shadow:0 0 12px var(--green); animation:pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
-
-.hero-name {
-  font-size: clamp(44px,7vw,88px);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
-  margin-bottom: 20px;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease 0.4s forwards;
-}
-.name-l1 { display:block; color: var(--text); text-shadow: 0 0 60px rgba(0,229,255,0.2); }
-.name-l2 {
-  display: block;
-  background: linear-gradient(90deg, var(--cyan), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  position: relative;
-}
-.name-l2::before, .name-l2::after {
-  content: attr(data-text);
-  position: absolute; top:0; left:0;
-  background: linear-gradient(90deg, var(--cyan), var(--purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.name-l2::before { animation: glitch1 5s infinite; clip-path: polygon(0 20%,100% 20%,100% 40%,0 40%); }
-.name-l2::after  { animation: glitch2 5s infinite; clip-path: polygon(0 65%,100% 65%,100% 80%,0 80%); }
-@keyframes glitch1 { 0%,94%,100%{transform:translate(0);opacity:0;} 95%{transform:translate(-5px,1px);opacity:.7;} 97%{transform:translate(4px,-1px);opacity:.7;} 99%{transform:translate(0);opacity:0;} }
-@keyframes glitch2 { 0%,92%,100%{transform:translate(0);opacity:0;} 93%{transform:translate(4px,2px);opacity:.7;} 95%{transform:translate(-3px,-1px);opacity:.7;} 97%{transform:translate(0);opacity:0;} }
-
-.hero-title {
-  font-family: var(--font-m);
-  font-size: clamp(11px,1.5vw,14px);
-  color: var(--cyan2);
-  letter-spacing: 0.1em;
-  margin-bottom: 28px;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease 0.6s forwards;
-}
-
-.hero-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 32px;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease 0.8s forwards;
-}
-.chip {
-  background: rgba(0,229,255,0.08);
-  border: 1px solid var(--border);
-  padding: 7px 16px;
-  font-family: var(--font-m);
-  font-size: 11px;
-  color: var(--text2);
-  letter-spacing: 0.08em;
-  transition: all 0.3s;
-  cursor: default;
-}
-.chip:hover { background: rgba(0,229,255,0.15); color: var(--cyan); border-color: var(--cyan); }
-
-.hero-contacts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease 1s forwards;
-  margin-bottom: 36px;
-}
-.clink { font-family:var(--font-m); font-size:12px; color:var(--text3); text-decoration:none; display:flex; align-items:center; gap:8px; transition:color .2s; }
-.clink i { color:var(--cyan); }
-.clink:hover { color:var(--cyan); }
-
-.hero-stats-row {
-  display: flex;
-  gap: 16px;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease 1.1s forwards;
-}
-.stat-pill {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 14px 20px;
-  text-align: center;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s;
-}
-.stat-pill:hover { border-color: var(--cyan); box-shadow: var(--glow); }
-.stat-n { font-family:var(--font-m); font-size:26px; font-weight:700; color:var(--cyan); text-shadow:0 0 20px rgba(0,229,255,0.5); }
-.stat-l { font-family:var(--font-m); font-size:9px; color:var(--text3); text-transform:uppercase; letter-spacing:.15em; margin-top:2px; }
-
-.scroll-hint {
-  position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:8px;
-  font-family:var(--font-m); font-size:9px; color:var(--text3); letter-spacing:.2em;
-  opacity:0; animation:fadeIn 1s ease 1.5s forwards;
-}
-.scroll-line { width:1px; height:36px; background:linear-gradient(to bottom,var(--cyan),transparent); animation:scrollP 2s infinite; }
-@keyframes scrollP { 0%{transform:scaleY(0);transform-origin:top;} 50%{transform:scaleY(1);transform-origin:top;} 51%{transform:scaleY(1);transform-origin:bottom;} 100%{transform:scaleY(0);transform-origin:bottom;} }
-
-/* ── SECTION ── */
-.section { padding: 72px 0; }
-
-.sec-head {
-  display:flex; align-items:center; gap:16px; margin-bottom:40px;
-}
-.sec-num { font-family:var(--font-m); font-size:10px; color:var(--cyan); opacity:.5; }
-.sec-title-text { font-size:13px; font-weight:700; letter-spacing:.28em; text-transform:uppercase; color:var(--text2); }
-.sec-line { flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent); }
-.sec-dot { width:6px; height:6px; background:var(--cyan); border-radius:50%; box-shadow:0 0 10px var(--cyan); }
-
-/* ── SUMMARY ── */
-.summary-box {
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-left: 3px solid var(--cyan);
-  padding: 36px 44px;
-  position: relative;
-  backdrop-filter: blur(20px);
-  overflow: hidden;
-}
-.summary-box::before {
-  content: '';
-  position: absolute;
-  top:0; left:0; right:0;
-  height: 1px;
-  background: linear-gradient(90deg, var(--cyan), var(--purple), transparent);
-}
-.summary-tag {
-  font-family:var(--font-m); font-size:9px; color:var(--text3); letter-spacing:.2em;
-  position:absolute; top:14px; right:18px;
-}
-.summary-text {
-  font-size:16px; line-height:1.85; color:var(--text2); font-weight:400;
-}
-.summary-text strong { color:var(--text); font-weight:700; }
-.summary-text .hi { color:var(--cyan); font-weight:600; }
-
-/* ── SKILLS ── */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 16px;
-}
-.skill-cat {
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  padding: 22px 24px;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-.skill-cat::after {
-  content:'';
-  position:absolute; top:0; left:0; right:0;
-  height:2px;
-  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-  opacity:0; transition:opacity .3s;
-}
-.skill-cat:hover { border-color:var(--border); box-shadow:var(--glow); }
-.skill-cat:hover::after { opacity:1; }
-.skill-cat-label {
-  font-family:var(--font-m); font-size:10px; color:var(--cyan);
-  letter-spacing:.18em; text-transform:uppercase; margin-bottom:14px;
-  display:flex; align-items:center; gap:8px;
-}
-.skill-cat-label i { font-size:12px; }
-.stags { display:flex; flex-wrap:wrap; gap:7px; }
-.stag {
-  background: rgba(0,229,255,0.07);
-  border:1px solid rgba(0,229,255,0.12);
-  padding: 5px 12px;
-  font-family:var(--font-m); font-size:11px; color:var(--text2);
-  transition:all .2s; cursor:default;
-}
-.stag:hover { background:rgba(0,229,255,0.14); border-color:rgba(0,229,255,0.35); color:var(--cyan); }
-
-/* ── EXPANDABLE CARDS (Experience, Projects, Achievements) ── */
-.exp-list, .proj-list, .ach-list { display:flex; flex-direction:column; gap:12px; }
-
-.exp-card, .proj-card-item, .ach-card-item {
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  overflow: hidden;
-  backdrop-filter: blur(20px);
-  transition: border-color .3s, box-shadow .3s;
-  cursor: pointer;
-}
-.exp-card:hover, .proj-card-item:hover, .ach-card-item:hover {
-  border-color: var(--border);
-  box-shadow: var(--glow);
-}
-
-/* Card header (always visible) */
-.card-header {
-  display:flex; align-items:center; gap:20px;
-  padding: 22px 28px;
-  user-select: none;
-  position: relative;
-}
-.card-header::before {
-  content:'';
-  position:absolute; left:0; top:0; bottom:0;
-  width: 3px;
-  background: linear-gradient(to bottom, var(--cyan), var(--purple));
-  opacity:0; transition:opacity .3s;
-}
-.exp-card.open .card-header::before,
-.proj-card-item.open .card-header::before,
-.ach-card-item.open .card-header::before { opacity:1; }
-
-.card-icon {
-  width:46px; height:46px;
-  border:1px solid var(--border);
-  display:flex; align-items:center; justify-content:center;
-  flex-shrink:0;
-  transition:all .3s;
-}
-.exp-card.open .card-icon, .proj-card-item.open .card-icon, .ach-card-item.open .card-icon {
-  border-color:var(--cyan);
-  box-shadow:0 0 16px rgba(0,229,255,0.2);
-}
-.card-icon i { font-size:18px; color:var(--cyan); }
-.card-icon .card-emoji { font-size:24px; }
-
-.card-meta { flex:1; }
-.card-title { font-size:17px; font-weight:700; color:var(--text); margin-bottom:4px; }
-.card-sub { font-family:var(--font-m); font-size:11px; color:var(--cyan); letter-spacing:.08em; }
-
-.card-right { display:flex; align-items:center; gap:12px; margin-left:auto; }
-.card-period {
-  font-family:var(--font-m); font-size:10px; color:var(--green);
-  background: rgba(0,255,179,0.08);
-  border:1px solid rgba(0,255,179,0.2);
-  padding:5px 12px; letter-spacing:.1em;
-}
-.card-chevron {
-  width:28px; height:28px;
-  border:1px solid var(--border);
-  display:flex; align-items:center; justify-content:center;
-  color:var(--text3); font-size:12px;
-  transition:all .3s;
-}
-.exp-card.open .card-chevron, .proj-card-item.open .card-chevron, .ach-card-item.open .card-chevron {
-  transform:rotate(180deg);
-  border-color:var(--cyan); color:var(--cyan);
-}
-
-/* Card body (expandable) */
-.card-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1);
-}
-.card-body-inner {
-  padding: 0 28px 28px;
-  border-top: 1px solid var(--border2);
-  margin-top: 0;
-}
-
-/* Detail illustration */
-.detail-illo {
-  width: 100%;
-  height: 160px;
-  background: var(--bg2);
-  border: 1px solid var(--border2);
-  margin-bottom: 24px;
-  margin-top: 24px;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.detail-illo svg { width:100%; height:100%; }
-
-.detail-cols { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-
-.detail-group-label {
-  font-family:var(--font-m); font-size:9px; letter-spacing:.22em; text-transform:uppercase;
-  margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border2);
-}
-.detail-group-label.resp { color:var(--text3); }
-.detail-group-label.impact { color:var(--green); }
-.detail-group-label.about { color:var(--cyan); }
-
-.detail-bullets { list-style:none; }
-.detail-bullets li {
-  font-size:14px; color:var(--text2); padding:5px 0 5px 18px; position:relative; line-height:1.6;
-}
-.detail-bullets.resp li::before {
-  content:'//'; position:absolute; left:0; color:var(--text3); font-family:var(--font-m); font-size:9px; top:7px;
-}
-.detail-bullets.impact li { color:var(--text); }
-.detail-bullets.impact li::before {
-  content:'▸'; position:absolute; left:0; color:var(--green); font-size:10px; top:7px;
-}
-.detail-bullets.about li::before {
-  content:'◆'; position:absolute; left:0; color:var(--cyan); font-size:8px; top:8px;
-}
-
-.tech-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:20px; }
-.tech-tag {
-  font-family:var(--font-m); font-size:10px; color:var(--cyan);
-  background:rgba(0,229,255,0.06); border:1px solid rgba(0,229,255,0.15);
-  padding:4px 10px; letter-spacing:.06em;
-}
-
-/* Pipeline */
-.pipeline-viz {
-  display:flex; align-items:center; gap:0;
-  margin-top:20px; overflow-x:auto;
-}
-.pnode {
-  background:rgba(0,229,255,0.07); border:1px solid rgba(0,229,255,0.25);
-  padding:6px 12px; font-family:var(--font-m); font-size:10px; color:var(--cyan); letter-spacing:.1em;
-}
-.parr {
-  flex:1; min-width:20px; height:1px;
-  background:linear-gradient(90deg,rgba(0,229,255,.3),rgba(168,85,247,.3));
-  position:relative;
-}
-.parr::after {
-  content:'▶'; position:absolute; right:-5px; top:50%; transform:translateY(-50%);
-  font-size:8px; color:rgba(168,85,247,.7);
-}
-
-/* ── EDUCATION ── */
-.edu-card {
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  padding: 36px 40px;
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  backdrop-filter: blur(20px);
-  transition: all .3s;
-  border-left: 3px solid var(--purple);
-}
-.edu-card:hover { border-color:rgba(168,85,247,.4); box-shadow:0 0 40px rgba(168,85,247,.1); }
-.edu-icon { width:60px; height:60px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; }
-.edu-deg { font-size:20px; font-weight:800; color:var(--text); margin-bottom:6px; }
-.edu-school { font-family:var(--font-m); font-size:12px; color:var(--purple); letter-spacing:.08em; margin-bottom:6px; }
-.edu-meta { font-family:var(--font-m); font-size:11px; color:var(--text3); }
-
-/* ── FOOTER ── */
-footer { border-top:1px solid var(--border2); padding:36px 0; text-align:center; }
-.foot-name { font-family:var(--font-m); font-size:14px; color:var(--cyan); font-weight:700; margin-bottom:8px; text-shadow:0 0 20px rgba(0,229,255,.4); }
-.foot-txt { font-family:var(--font-m); font-size:11px; color:var(--text3); letter-spacing:.14em; }
-
-/* ── ANIMATIONS ── */
-@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-@keyframes fadeInUp { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
-.reveal { opacity:0; transform:translateY(28px); transition:opacity .8s ease,transform .8s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
-
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  .header-grid{grid-template-columns:1fr;}
-  .avatar-area{flex-direction:row; flex-wrap:wrap; justify-content:center;}
-  .avatar-ring{width:180px;height:180px;}
-  .skills-grid{grid-template-columns:1fr 1fr;}
-  .detail-cols{grid-template-columns:1fr;}
-  body{cursor:auto;}
-  .cursor,.cursor-ring{display:none;}
-}
-@media(max-width:600px){
-  .wrap{padding:0 16px;}
-  header{padding:70px 0 40px; min-height:unset;}
-  .skills-grid{grid-template-columns:1fr;}
-  .summary-box{padding:22px 20px;}
-  .edu-card{flex-direction:column;gap:16px;}
-  .card-header{padding:16px 18px;}
-  .card-body-inner{padding:0 18px 20px;}
+@media print{
+  .grain,.loader,.cur,.cur-f,.nav,.prog,#wave,.mq,.badge,.pv,.toast,.hs-hint,.hs-bar,.hs-count,.cta-btns{display:none!important}
+  body{background:#fff;color:#000}
+  .rv,.ch,.mask>span{opacity:1!important;transform:none!important}
+  .portrait-img{clip-path:none!important}
+  .hs{background:#fff;color:#000}.hs-sticky{position:static;height:auto}.hs-track{flex-direction:column;transform:none!important;width:auto}.job{width:auto;break-inside:avoid}
+  .scrub .w{opacity:1!important}
+  .award{position:static;background:#fff!important;color:#000!important;border:1px solid #ccc}
 }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cring"></div>
-<canvas id="bgCanvas"></canvas>
-<div class="scanlines"></div>
+<div class="grain" aria-hidden="true"></div>
 
-<!-- LANG TOGGLE -->
-<div class="lang-bar">
-  <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
-  <button class="lang-btn" id="btnVI" onclick="setLang('vi')">VI</button>
+<!-- LOADER -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-top mono">
+    <span data-en="Calibrating signal" data-vi="Đang hiệu chỉnh tín hiệu">Calibrating signal</span>
+    <span>NVĐ / CV — 2026</span>
+  </div>
+  <div>
+    <div class="loader-num" id="lnum">000</div>
+    <div class="loader-bar"><i id="lbar"></i></div>
+  </div>
 </div>
 
-<div class="wrap">
+<div class="cur" id="cur"></div>
+<div class="cur-f" id="curf"><span id="curl">VIEW</span></div>
+<div class="prog" id="prog"></div>
 
-<!-- ══ HEADER ══ -->
-<header>
-  <div class="header-grid">
-    <div class="hero-left">
-      <div class="sys-line"><span class="sys-dot"></span><span data-en="SYSTEM ONLINE · PROFILE LOADED · VN-CENTRAL-NODE" data-vi="HỆ THỐNG HOẠT ĐỘNG · HỒ SƠ ĐÃ TẢI · VN-TRUNG-NODE">SYSTEM ONLINE · PROFILE LOADED · VN-CENTRAL-NODE</span></div>
-
-      <div class="hero-name">
-        <span class="name-l1">NGÔ VIẾT</span>
-        <span class="name-l2" data-text="DINH">ĐỊNH</span>
-      </div>
-
-      <div class="hero-title">
-        <span data-en="// SENIOR IOT / SCADA ENGINEER  |  SOLUTION ARCHITECT" data-vi="// KỸ SƯ IOT / SCADA CẤP CAO  |  KIẾN TRÚC SƯ GIẢI PHÁP">// SENIOR IOT / SCADA ENGINEER  |  SOLUTION ARCHITECT</span>
-      </div>
-
-      <div class="hero-chips">
-        <div class="chip" data-en="500+ MONITORING STATIONS" data-vi="500+ TRẠM QUAN TRẮC">500+ MONITORING STATIONS</div>
-        <div class="chip">AZURE &amp; AWS</div>
-        <div class="chip">POWER PLATFORM</div>
-        <div class="chip" data-en="7+ YRS EXPERIENCE" data-vi="7+ NĂM KINH NGHIỆM">7+ YRS EXPERIENCE</div>
-        <div class="chip" data-en="150+ FACTORIES" data-vi="150+ NHÀ MÁY">150+ FACTORIES</div>
-      </div>
-
-      <div class="hero-contacts">
-        <a href="tel:0339258546" class="clink"><i class="fas fa-phone"></i> 0339 258 546</a>
-        <a href="mailto:gsnvbu@gmail.com" class="clink"><i class="fas fa-envelope"></i> gsnvbu@gmail.com</a>
-        <span class="clink"><i class="fas fa-location-dot"></i> Da Nang, Vietnam</span>
-      </div>
-
-      <div class="hero-stats-row">
-        <div class="stat-pill"><div class="stat-n">7+</div><div class="stat-l" data-en="Years" data-vi="Năm KN">Years</div></div>
-        <div class="stat-pill"><div class="stat-n">500+</div><div class="stat-l" data-en="Stations" data-vi="Trạm">Stations</div></div>
-        <div class="stat-pill"><div class="stat-n">150+</div><div class="stat-l" data-en="Factories" data-vi="Nhà Máy">Factories</div></div>
-        <div class="stat-pill"><div class="stat-n">5×</div><div class="stat-l" data-en="Awards" data-vi="Giải Thưởng">Awards</div></div>
-      </div>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#top" class="logo mag" aria-label="Top"><b>Đ</b>ngo.viet.dinh</a>
+  <div class="nav-links" id="navl">
+    <span class="nav-pill" id="pill"></span>
+    <a href="#profile" data-en="Profile" data-vi="Hồ sơ">Profile</a>
+    <a href="#stack" data-en="Stack" data-vi="Kỹ năng">Stack</a>
+    <a href="#experience" data-en="Experience" data-vi="Kinh nghiệm">Experience</a>
+    <a href="#projects" data-en="Projects" data-vi="Dự án">Projects</a>
+    <a href="#awards" data-en="Awards" data-vi="Thành tích">Awards</a>
+    <a href="#contact" data-en="Contact" data-vi="Liên hệ">Contact</a>
+  </div>
+  <div class="nav-r">
+    <span class="clock mono"><span data-en="Da Nang" data-vi="Đà Nẵng">Da Nang</span> <b id="clock">--:--:--</b></span>
+    <div class="seg" id="seg" data-v="en" role="group" aria-label="Language">
+      <button class="on" data-l="en">EN</button><button data-l="vi">VI</button>
     </div>
+    <button class="ibtn" id="theme" aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</nav>
 
-    <!-- AVATAR -->
-    <div class="avatar-area">
-      <div class="avatar-ring">
-        <div class="avatar-inner">
-          <!-- SVG Avatar -->
-          <svg class="avatar-svg" viewBox="0 0 248 248" xmlns="http://www.w3.org/2000/svg">
-  
-  <defs>
-    <clipPath id="avatarClip">
-      <circle cx="124" cy="124" r="124"></circle>
-    </clipPath>
-  </defs>
+<main id="top">
 
-  <!-- Ảnh avatar -->
-  <image 
-    href="avatar.jpg"
-    x="0"
-    y="0"
-    width="248"
-    height="248"
-    clip-path="url(#avatarClip)"
-    preserveAspectRatio="xMidYMid slice"
-  />
+<!-- ═════════ HERO ═════════ -->
+<header class="hero" id="hero">
+  <canvas id="wave" aria-hidden="true"></canvas>
+  <div class="hero-meta mono">
+    <span>( CV — <span data-en="Portfolio Edition" data-vi="Bản Portfolio">Portfolio Edition</span> ’26 )</span>
+    <span class="live"><i></i><span data-en="Open to new projects" data-vi="Sẵn sàng cho dự án mới">Open to new projects</span></span>
+    <span>16.05°N · 108.20°E</span>
+  </div>
 
-</svg>
-        </div>
-        <div class="avatar-status"></div>
-      </div>
-
-      <div class="avatar-badges">
-        <div class="av-badge"><i class="fas fa-trophy"></i> <span><strong data-en="Innovation Employee" data-vi="Nhân Viên Sáng Tạo">Innovation Employee</strong> 2024</span></div>
-        <div class="av-badge"><i class="fas fa-star"></i> <span><strong data-en="Outstanding" data-vi="Xuất Sắc">Outstanding</strong> 2019–2023</span></div>
-        <div class="av-badge"><i class="fas fa-industry"></i> <span>Formosa · Samsung · Toyota</span></div>
-        <div class="av-badge"><i class="fas fa-graduation-cap"></i> <span data-en="Control Engineering — Nong Lam Univ." data-vi="Kỹ Thuật Điều Khiển — ĐH Nông Lâm">Control Engineering — Nong Lam Univ.</span></div>
+  <div class="hero-mid">
+    <h1 class="name" aria-label="Ngô Viết Định">
+      <span class="l1" data-split>Ngô Viết</span>
+      <span class="l2" data-split>ĐỊNH<span class="dot">.</span></span>
+    </h1>
+    <div class="portrait">
+      <div class="portrait-img"><img src="avatar-web.jpg" alt="Ngô Viết Định" width="900" height="1200" fetchpriority="high"></div>
+      <div class="badge" aria-hidden="true">
+        <div class="badge-in"></div>
+        <svg viewBox="0 0 100 100" style="color:var(--acc-ink)"><defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs><text><textPath href="#circ">IIoT · SCADA · Cloud · Automation ·</textPath></text></svg>
+        <div class="ctr" style="color:var(--acc-ink)">✦</div>
       </div>
     </div>
   </div>
 
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    <span data-en="SCROLL" data-vi="CUỘN">SCROLL</span>
+  <div class="hero-bot">
+    <p class="role rv"><span data-en="Senior IoT / SCADA Engineer" data-vi="Kỹ sư IoT / SCADA cấp cao">Senior IoT / SCADA Engineer</span> <span class="serif" data-en="&amp; Solution Architect" data-vi="&amp; Kiến trúc sư giải pháp">&amp; Solution Architect</span></p>
+    <div class="stats">
+      <div class="stat rv"><div class="v"><span data-count="7">0</span><sup>+</sup></div><div class="k mono" data-en="Years exp." data-vi="Năm KN">Years exp.</div></div>
+      <div class="stat rv"><div class="v"><span data-count="500">0</span><sup>+</sup></div><div class="k mono" data-en="Stations" data-vi="Trạm">Stations</div></div>
+      <div class="stat rv"><div class="v"><span data-count="150">0</span><sup>+</sup></div><div class="k mono" data-en="Factories" data-vi="Nhà máy">Factories</div></div>
+      <div class="stat rv"><div class="v"><span data-count="5">0</span><sup>×</sup></div><div class="k mono" data-en="Awards" data-vi="Giải thưởng">Awards</div></div>
+    </div>
   </div>
 </header>
 
-<!-- ══ SUMMARY ══ -->
-<section class="section reveal">
-  <div class="sec-head">
-    <span class="sec-num">01</span>
-    <span class="sec-title-text" data-en="Profile" data-vi="Giới Thiệu">Profile</span>
-    <div class="sec-line"></div><div class="sec-dot"></div>
-  </div>
-  <div class="summary-box">
-    <div class="summary-tag">PROFILE.SYS</div>
-    <p class="summary-text" data-en='Senior Automation &amp; Industrial IoT Engineer with <strong>7+ years</strong> delivering large-scale <span class="hi">SCADA and IIoT systems</span> across manufacturing and environmental monitoring. Proven track record managing <strong>500+ monitoring stations</strong> and ~700 EMS deployments across ~150 factories for enterprise clients including <strong>Formosa, Samsung, Toyota, and Vinamilk</strong>. Deep expertise spanning OT automation, <span class="hi">cloud architecture (Azure &amp; AWS)</span>, Microsoft Power Platform, and industrial protocols — enabling <strong>digital transformation</strong> and operational optimization at national scale.' data-vi='Kỹ sư Tự động hóa &amp; IoT Công nghiệp cấp cao với <strong>7+ năm</strong> triển khai hệ thống <span class="hi">SCADA và IIoT quy mô lớn</span> trong lĩnh vực sản xuất và quan trắc môi trường. Kinh nghiệm thực tiễn quản lý <strong>500+ trạm quan trắc</strong>, ~700 trạm EMS tại ~150 nhà máy cho các khách hàng doanh nghiệp gồm <strong>Formosa, Samsung, Toyota, Vinamilk</strong>. Chuyên môn sâu về tự động hóa OT, <span class="hi">kiến trúc đám mây (Azure &amp; AWS)</span>, Microsoft Power Platform và giao thức công nghiệp — thúc đẩy <strong>chuyển đổi số</strong> và tối ưu vận hành ở quy mô quốc gia.'>
-      Senior Automation &amp; Industrial IoT Engineer with <strong>7+ years</strong> delivering large-scale <span class="hi">SCADA and IIoT systems</span> across manufacturing and environmental monitoring. Proven track record managing <strong>500+ monitoring stations</strong> and ~700 EMS deployments across ~150 factories for enterprise clients including <strong>Formosa, Samsung, Toyota, and Vinamilk</strong>. Deep expertise spanning OT automation, <span class="hi">cloud architecture (Azure &amp; AWS)</span>, Microsoft Power Platform, and industrial protocols — enabling <strong>digital transformation</strong> and operational optimization at national scale.
-    </p>
-  </div>
-</section>
+<!-- ═════════ MARQUEE ═════════ -->
+<div class="mq" aria-hidden="true">
+  <div class="mq-row a" data-dir="-1"><span>Formosa</span><span>Samsung</span><span>Toyota</span><span>Vinamilk</span><span>iLotusLand</span><span>Viet An</span></div>
+  <div class="mq-row b" data-dir="1"><span>SCADA</span><span>MQTT</span><span>OPC UA</span><span>Azure</span><span>AWS</span><span>Power Platform</span><span>WinCC</span></div>
+</div>
 
-<!-- ══ SKILLS ══ -->
-<section class="section reveal">
-  <div class="sec-head">
-    <span class="sec-num">02</span>
-    <span class="sec-title-text" data-en="Technical Stack" data-vi="Kỹ Năng Kỹ Thuật">Technical Stack</span>
-    <div class="sec-line"></div><div class="sec-dot"></div>
-  </div>
-  <div class="skills-grid">
-    <div class="skill-cat"><div class="skill-cat-label"><i class="fas fa-microchip"></i><span data-en="Industrial / OT" data-vi="Công Nghiệp / OT">Industrial / OT</span></div><div class="stags"><span class="stag">SCADA</span><span class="stag">WinCC</span><span class="stag">TIA Portal</span><span class="stag">PLC S7-1200</span><span class="stag">S7-1500</span><span class="stag">Schneider</span><span class="stag">HMI</span></div></div>
-    <div class="skill-cat"><div class="skill-cat-label"><i class="fas fa-wifi"></i><span data-en="IoT / Protocols" data-vi="IoT / Giao Thức">IoT / Protocols</span></div><div class="stags"><span class="stag">MQTT</span><span class="stag">Modbus TCP</span><span class="stag">Modbus RTU</span><span class="stag">OPC UA</span><span class="stag">CoAP</span><span class="stag">LoRa</span><span class="stag">Sigfox</span></div></div>
-    <div class="skill-cat"><div class="skill-cat-label"><i class="fas fa-cloud"></i><span data-en="Cloud / Infra" data-vi="Đám Mây / Hạ Tầng">Cloud / Infra</span></div><div class="stags"><span class="stag">Azure</span><span class="stag">AWS</span><span class="stag">VPN</span><span class="stag">VLAN</span><span class="stag">Fortinet</span><span class="stag">Cisco</span><span class="stag">TLS/SSL</span></div></div>
-    <div class="skill-cat"><div class="skill-cat-label"><i class="fas fa-cube"></i>Power Platform</div><div class="stags"><span class="stag">Power Apps</span><span class="stag">Power Automate</span><span class="stag">Power BI</span><span class="stag">SharePoint</span><span class="stag">Dataverse</span><span class="stag">Azure Functions</span></div></div>
-    <div class="skill-cat"><div class="skill-cat-label"><i class="fas fa-code"></i><span data-en="Programming" data-vi="Lập Trình">Programming</span></div><div class="stags"><span class="stag">Python</span><span class="stag">C#</span><span class="stag">C++</span><span class="stag">ASP.NET</span><span class="stag">SQL Server</span><span class="stag">MySQL</span></div></div>
-    <div class="skill-cat"><div class="skill-cat-label"><i class="fas fa-globe"></i><span data-en="Web / Viz" data-vi="Web / Trực Quan">Web / Viz</span></div><div class="stags"><span class="stag">HTML/JS</span><span class="stag">Chart.js</span><span class="stag">REST API</span><span class="stag">Flask</span><span class="stag">Dashboard UI</span></div></div>
+<!-- ═════════ PROFILE ═════════ -->
+<section class="sec wrap" id="profile">
+  <div class="kicker mono rv"><span class="n">01</span><span class="scr" data-en="Profile" data-vi="Hồ sơ">Profile</span><span class="ln"></span><span>PROFILE.SYS</span></div>
+  <div class="about-grid">
+    <aside class="about-side rv">
+      <a class="chip-l mono" href="mailto:gsnvbu@gmail.com"><span>Email</span><b>gsnvbu@gmail.com</b></a>
+      <a class="chip-l mono" href="tel:0339258546"><span data-en="Phone" data-vi="Điện thoại">Phone</span><b>0339 258 546</b></a>
+      <div class="chip-l mono"><span data-en="Based in" data-vi="Nơi ở">Based in</span><b data-en="Da Nang, Vietnam" data-vi="Đà Nẵng, Việt Nam">Da Nang, Vietnam</b></div>
+      <div class="chip-l mono"><span data-en="Education" data-vi="Học vấn">Education</span><b data-en="Nong Lam Univ." data-vi="ĐH Nông Lâm">Nong Lam Univ.</b></div>
+      <div class="chip-l mono"><span data-en="Clients" data-vi="Khách hàng">Clients</span><b>Formosa · Samsung · Toyota</b></div>
+    </aside>
+    <p class="scrub" id="scrub" data-en='Senior Automation &amp; Industrial IoT Engineer with <strong>7+ years</strong> delivering large-scale <span class="hi">SCADA and IIoT systems</span> across manufacturing and environmental monitoring. Proven track record managing <strong>500+ monitoring stations</strong> and ~700 EMS deployments across ~150 factories for enterprise clients including <strong>Formosa, Samsung, Toyota, and Vinamilk</strong>. Deep expertise spanning OT automation, <span class="hi">cloud architecture (Azure &amp; AWS)</span>, Microsoft Power Platform, and industrial protocols — enabling <strong>digital transformation</strong> and operational optimization at national scale.' data-vi='Kỹ sư Tự động hóa &amp; IoT Công nghiệp cấp cao với <strong>7+ năm</strong> triển khai hệ thống <span class="hi">SCADA và IIoT quy mô lớn</span> trong lĩnh vực sản xuất và quan trắc môi trường. Kinh nghiệm thực tiễn quản lý <strong>500+ trạm quan trắc</strong>, ~700 trạm EMS tại ~150 nhà máy cho các khách hàng doanh nghiệp gồm <strong>Formosa, Samsung, Toyota, Vinamilk</strong>. Chuyên môn sâu về tự động hóa OT, <span class="hi">kiến trúc đám mây (Azure &amp; AWS)</span>, Microsoft Power Platform và giao thức công nghiệp — thúc đẩy <strong>chuyển đổi số</strong> và tối ưu vận hành ở quy mô quốc gia.'></p>
   </div>
 </section>
 
-<!-- ══ EXPERIENCE ══ -->
-<section class="section reveal">
-  <div class="sec-head">
-    <span class="sec-num">03</span>
-    <span class="sec-title-text" data-en="Experience" data-vi="Kinh Nghiệm">Experience</span>
-    <div class="sec-line"></div><div class="sec-dot"></div>
+<!-- ═════════ STACK ═════════ -->
+<section class="sec wrap" id="stack" style="padding-top:0">
+  <div class="kicker mono rv"><span class="n">02</span><span class="scr" data-en="Technical Stack" data-vi="Kỹ năng kỹ thuật">Technical Stack</span><span class="ln"></span><span>STACK.CFG</span></div>
+  <div class="stack-head">
+    <h2 class="h2 rv"><span class="mask"><span data-en="From sensor" data-vi="Từ cảm biến">From sensor</span></span><span class="mask"><span><span class="serif" data-en="to cloud." data-vi="đến đám mây.">to cloud.</span></span></span></h2>
+    <p class="rv" data-en="Six layers of the stack I design, deploy and operate — from field PLCs to executive dashboards." data-vi="Sáu lớp công nghệ tôi thiết kế, triển khai và vận hành — từ PLC hiện trường đến dashboard điều hành.">Six layers of the stack I design, deploy and operate — from field PLCs to executive dashboards.</p>
   </div>
-  <div class="exp-list">
+  <div class="bento" id="bento"></div>
+</section>
 
-    <!-- EXP 1 -->
-    <div class="exp-card" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon"><i class="fas fa-users-gear"></i></div>
-        <div class="card-meta">
-          <div class="card-title" data-en="Service Team Leader" data-vi="Trưởng Nhóm Dịch Vụ">Service Team Leader</div>
-          <div class="card-sub">VIET AN ENVIRONMENT — <span data-en="CENTRAL REGION" data-vi="KHU VỰC MIỀN TRUNG">CENTRAL REGION</span></div>
+<!-- ═════════ EXPERIENCE ═════════ -->
+<section class="hs" id="experience">
+  <div class="hs-sticky">
+    <div class="kicker mono rv"><span class="n">03</span><span class="scr" data-en="Experience" data-vi="Kinh nghiệm">Experience</span><span class="ln"></span><span>2017 → 2025</span></div>
+    <div class="hs-track" id="track">
+      <div class="hs-intro">
+        <div>
+          <h2 class="h2"><span data-en="Eight years" data-vi="Tám năm">Eight years</span><br><span class="serif acc" data-en="in the field." data-vi="thực chiến.">in the field.</span></h2>
+          <p data-en="From programming PLCs on factory floors to leading the service team for the entire Central Region." data-vi="Từ lập trình PLC tại xưởng sản xuất đến dẫn dắt đội dịch vụ toàn khu vực miền Trung.">From programming PLCs on factory floors to leading the service team for the entire Central Region.</p>
         </div>
-        <div class="card-right">
-          <div class="card-period">2022 — 2025</div>
-          <div class="card-chevron"><i class="fas fa-chevron-down"></i></div>
-        </div>
+        <div class="hs-hint mono"><svg viewBox="0 0 48 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 6h46M40 1l6 5-6 5"/></svg><span data-en="Keep scrolling" data-vi="Tiếp tục cuộn">Keep scrolling</span></div>
       </div>
-      <div class="card-body">
-        <div class="card-body-inner">
-          <!-- Illustration -->
-          <div class="detail-illo">
-            <svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
-              <rect width="800" height="160" fill="#071223"/>
-              <!-- Map of Vietnam stylized -->
-              <path d="M180 20 Q195 15 205 30 Q215 50 210 70 Q205 90 195 105 Q185 120 175 130 Q165 140 158 135 Q150 128 155 115 Q160 100 165 85 Q168 70 165 55 Q162 40 170 28 Z" fill="none" stroke="rgba(0,229,255,0.3)" stroke-width="1.5"/>
-              <!-- Station dots -->
-              <circle cx="190" cy="45" r="4" fill="#00e5ff" opacity=".9"><animate attributeName="opacity" values=".9;.3;.9" dur="2s" repeatCount="indefinite"/></circle>
-              <circle cx="185" cy="75" r="4" fill="#00ffb3" opacity=".9"><animate attributeName="opacity" values=".9;.3;.9" dur="1.7s" repeatCount="indefinite"/></circle>
-              <circle cx="175" cy="108" r="4" fill="#a855f7" opacity=".9"><animate attributeName="opacity" values=".9;.3;.9" dur="2.3s" repeatCount="indefinite"/></circle>
-              <circle cx="168" cy="128" r="4" fill="#00e5ff" opacity=".9"><animate attributeName="opacity" values=".9;.3;.9" dur="1.5s" repeatCount="indefinite"/></circle>
-              <!-- Lines from stations to hub -->
-              <line x1="190" y1="45" x2="350" y2="80" stroke="rgba(0,229,255,0.2)" stroke-width="1" stroke-dasharray="4 4"/>
-              <line x1="185" y1="75" x2="350" y2="80" stroke="rgba(0,255,179,0.2)" stroke-width="1" stroke-dasharray="4 4"/>
-              <line x1="175" y1="108" x2="350" y2="80" stroke="rgba(168,85,247,0.2)" stroke-width="1" stroke-dasharray="4 4"/>
-              <line x1="168" y1="128" x2="350" y2="80" stroke="rgba(0,229,255,0.2)" stroke-width="1" stroke-dasharray="4 4"/>
-              <!-- Hub -->
-              <circle cx="350" cy="80" r="18" fill="none" stroke="rgba(0,229,255,0.5)" stroke-width="1.5"/>
-              <circle cx="350" cy="80" r="10" fill="rgba(0,229,255,0.15)"/>
-              <circle cx="350" cy="80" r="4" fill="#00e5ff"/>
-              <text x="350" y="108" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="rgba(0,229,255,0.7)" letter-spacing="1">HUB</text>
-              <!-- Lines to cloud -->
-              <line x1="368" y1="80" x2="500" y2="80" stroke="rgba(0,229,255,0.3)" stroke-width="1.5"/>
-              <!-- Cloud icon -->
-              <path d="M515 68 Q515 60 525 60 Q525 55 535 57 Q538 52 545 55 Q555 52 558 60 Q565 60 565 68 Q565 76 555 76 L525 76 Q515 76 515 68Z" fill="none" stroke="rgba(0,229,255,0.5)" stroke-width="1.5"/>
-              <text x="540" y="95" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="rgba(0,229,255,0.6)" letter-spacing="1">CLOUD</text>
-              <!-- Dashboard box -->
-              <rect x="600" y="52" width="120" height="56" rx="2" fill="rgba(0,229,255,0.05)" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
-              <line x1="565" y1="80" x2="600" y2="80" stroke="rgba(0,229,255,0.3)" stroke-width="1.5"/>
-              <rect x="608" y="60" width="20" height="3" rx="1" fill="rgba(0,229,255,0.4)"/>
-              <rect x="608" y="66" width="35" height="3" rx="1" fill="rgba(0,255,179,0.4)"/>
-              <rect x="608" y="72" width="28" height="3" rx="1" fill="rgba(168,85,247,0.4)"/>
-              <!-- Mini bar chart -->
-              <rect x="650" y="88" width="8" height="14" fill="rgba(0,229,255,0.3)"/>
-              <rect x="662" y="82" width="8" height="20" fill="rgba(0,255,179,0.3)"/>
-              <rect x="674" y="85" width="8" height="17" fill="rgba(168,85,247,0.3)"/>
-              <rect x="686" y="78" width="8" height="24" fill="rgba(0,229,255,0.3)"/>
-              <rect x="698" y="83" width="8" height="19" fill="rgba(0,255,179,0.3)"/>
-              <text x="660" y="115" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(0,229,255,0.5)" letter-spacing="1">DASHBOARD</text>
-              <!-- Labels -->
-              <text x="183" y="148" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(0,229,255,0.5)">STATIONS</text>
-            </svg>
-          </div>
-          <div class="detail-cols">
-            <div>
-              <div class="detail-group-label resp" data-en="// Responsibilities" data-vi="// Trách Nhiệm">// Responsibilities</div>
-              <ul class="detail-bullets resp">
-                <li data-en="Led technical operations for SCADA & communication systems across the Central Region" data-vi="Dẫn dắt vận hành kỹ thuật hệ thống SCADA & truyền thông khu vực miền Trung">Led technical operations for SCADA & communication systems across the Central Region</li>
-                <li data-en="Consulting on industrial automation, IoT and communication solutions" data-vi="Tư vấn giải pháp tự động hóa công nghiệp, IoT và truyền thông">Consulting on industrial automation, IoT and communication solutions</li>
-                <li data-en="Coordinated platform integration: iLotusLand & internal enterprise systems" data-vi="Điều phối tích hợp nền tảng: iLotusLand & hệ thống nội bộ doanh nghiệp">Coordinated platform integration: iLotusLand & internal enterprise systems</li>
-                <li data-en="System assessments, upgrades, and technical training for field teams" data-vi="Đánh giá hệ thống, nâng cấp và đào tạo kỹ thuật cho nhóm hiện trường">System assessments, upgrades, and technical training for field teams</li>
-                <li data-en="Primary escalation point for critical system incidents" data-vi="Điểm leo thang chính cho các sự cố hệ thống nghiêm trọng">Primary escalation point for critical system incidents</li>
-              </ul>
-            </div>
-            <div>
-              <div class="detail-group-label impact" data-en="▸ Impact" data-vi="▸ Kết Quả">▸ Impact</div>
-              <ul class="detail-bullets impact">
-                <li data-en="Improved system stability & incident response time significantly" data-vi="Cải thiện đáng kể độ ổn định hệ thống & thời gian xử lý sự cố">Improved system stability & incident response time significantly</li>
-                <li data-en="Standardized technical processes, reducing team onboarding time ~40%" data-vi="Chuẩn hóa quy trình kỹ thuật, giảm thời gian đào tạo nhân viên mới ~40%">Standardized technical processes, reducing team onboarding time ~40%</li>
-                <li data-en="Outstanding Employee Award — 2022, 2023, 2024" data-vi="Giải Nhân Viên Xuất Sắc — 2022, 2023, 2024">Outstanding Employee Award — 2022, 2023, 2024</li>
-              </ul>
-            </div>
-          </div>
-          <div class="tech-row">
-            <span class="tech-tag">SCADA</span><span class="tech-tag">iLotusLand</span><span class="tech-tag">MQTT</span><span class="tech-tag">Modbus</span><span class="tech-tag">SQL Server</span><span class="tech-tag">Team Leadership</span>
-          </div>
-        </div>
-      </div>
+      <!-- jobs injected -->
     </div>
-
-    <!-- EXP 2 -->
-    <div class="exp-card" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon"><i class="fas fa-network-wired"></i></div>
-        <div class="card-meta">
-          <div class="card-title" data-en="IoT Network Engineer" data-vi="Kỹ Sư Mạng IoT">IoT Network Engineer</div>
-          <div class="card-sub">ILOTUSLAND VIETNAM</div>
-        </div>
-        <div class="card-right">
-          <div class="card-period">2021 — 2022</div>
-          <div class="card-chevron"><i class="fas fa-chevron-down"></i></div>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-body-inner">
-          <div class="detail-illo">
-            <svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
-              <rect width="800" height="160" fill="#071223"/>
-              <!-- IoT Architecture visual -->
-              <!-- Layer 1: Devices -->
-              <rect x="20" y="55" width="70" height="50" rx="3" fill="rgba(0,229,255,0.06)" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
-              <text x="55" y="76" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#00e5ff">SENSORS</text>
-              <rect x="24" y="83" width="14" height="16" rx="1" fill="rgba(0,229,255,0.2)"/>
-              <rect x="42" y="83" width="14" height="16" rx="1" fill="rgba(0,255,179,0.2)"/>
-              <rect x="60" y="83" width="14" height="16" rx="1" fill="rgba(168,85,247,0.2)"/>
-              <circle cx="31" cy="91" r="4" fill="rgba(0,229,255,0.5)"/>
-              <circle cx="49" cy="91" r="4" fill="rgba(0,255,179,0.5)"/>
-              <circle cx="67" cy="91" r="4" fill="rgba(168,85,247,0.5)"/>
-              <!-- Arrow 1 -->
-              <line x1="90" y1="80" x2="145" y2="80" stroke="rgba(0,229,255,0.4)" stroke-width="1.5" stroke-dasharray="5 3"/>
-              <polygon points="145,76 155,80 145,84" fill="rgba(0,229,255,0.6)"/>
-              <text x="118" y="72" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,229,255,0.5)">MQTT</text>
-              <!-- Layer 2: Gateway -->
-              <rect x="155" y="55" width="90" height="50" rx="3" fill="rgba(0,255,179,0.06)" stroke="rgba(0,255,179,0.3)" stroke-width="1"/>
-              <text x="200" y="76" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#00ffb3">GATEWAY</text>
-              <rect x="168" y="83" width="50" height="16" rx="2" fill="rgba(0,255,179,0.12)"/>
-              <line x1="172" y1="91" x2="214" y2="91" stroke="rgba(0,255,179,0.5)" stroke-width="1"/>
-              <circle cx="178" cy="91" r="3" fill="#00ffb3" opacity=".7"/>
-              <circle cx="193" cy="91" r="3" fill="#00ffb3" opacity=".7"/>
-              <circle cx="208" cy="91" r="3" fill="#00ffb3" opacity=".7"/>
-              <!-- Arrow 2 -->
-              <line x1="245" y1="80" x2="300" y2="80" stroke="rgba(0,229,255,0.4)" stroke-width="1.5" stroke-dasharray="5 3"/>
-              <polygon points="300,76 310,80 300,84" fill="rgba(0,229,255,0.6)"/>
-              <text x="273" y="72" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,229,255,0.5)">TLS/SSL</text>
-              <!-- Layer 3: Cloud -->
-              <rect x="310" y="48" width="110" height="64" rx="3" fill="rgba(168,85,247,0.06)" stroke="rgba(168,85,247,0.3)" stroke-width="1"/>
-              <text x="365" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#a855f7">CLOUD</text>
-              <text x="365" y="82" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(168,85,247,0.6)">AWS / AZURE</text>
-              <rect x="322" y="90" width="30" height="14" rx="2" fill="rgba(168,85,247,0.15)" stroke="rgba(168,85,247,0.3)" stroke-width="1"/>
-              <rect x="360" y="90" width="30" height="14" rx="2" fill="rgba(0,229,255,0.1)" stroke="rgba(0,229,255,0.25)" stroke-width="1"/>
-              <text x="337" y="101" text-anchor="middle" font-family="'Space Mono',monospace" font-size="6" fill="rgba(168,85,247,0.8)">IoT Hub</text>
-              <text x="375" y="101" text-anchor="middle" font-family="'Space Mono',monospace" font-size="6" fill="rgba(0,229,255,0.7)">Storage</text>
-              <!-- Arrow 3 -->
-              <line x1="420" y1="80" x2="470" y2="80" stroke="rgba(0,229,255,0.4)" stroke-width="1.5" stroke-dasharray="5 3"/>
-              <polygon points="470,76 480,80 470,84" fill="rgba(0,229,255,0.6)"/>
-              <text x="448" y="72" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,229,255,0.5)">API</text>
-              <!-- Layer 4: Dashboard -->
-              <rect x="480" y="48" width="150" height="64" rx="3" fill="rgba(0,229,255,0.05)" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
-              <text x="555" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#00e5ff">DASHBOARD</text>
-              <!-- Mini chart in dashboard -->
-              <polyline points="492,100 507,88 522,94 537,82 552,90 567,78 582,85 597,75 612,83" fill="none" stroke="rgba(0,229,255,0.6)" stroke-width="1.5"/>
-              <circle cx="612" cy="83" r="3" fill="#00e5ff"/>
-              <!-- Security layer -->
-              <rect x="650" y="48" width="130" height="64" rx="3" fill="rgba(255,157,0,0.05)" stroke="rgba(255,157,0,0.3)" stroke-width="1"/>
-              <line x1="630" y1="80" x2="650" y2="80" stroke="rgba(255,157,0,0.4)" stroke-width="1.5" stroke-dasharray="4 3"/>
-              <polygon points="648,76 658,80 648,84" fill="rgba(255,157,0,0.6)"/>
-              <text x="715" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#ff9d00">SECURITY</text>
-              <text x="715" y="82" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,157,0,0.6)">VPN · FW · TLS</text>
-              <path d="M695 90 L695 98 L715 105 L735 98 L735 90 L715 86 Z" fill="rgba(255,157,0,0.1)" stroke="rgba(255,157,0,0.4)" stroke-width="1"/>
-              <text x="715" y="100" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="rgba(255,157,0,0.8)">🔒</text>
-            </svg>
-          </div>
-          <div class="detail-cols">
-            <div>
-              <div class="detail-group-label resp" data-en="// Responsibilities" data-vi="// Trách Nhiệm">// Responsibilities</div>
-              <ul class="detail-bullets resp">
-                <li data-en="Designed end-to-end IoT architectures: Devices → Gateway → Cloud" data-vi="Thiết kế kiến trúc IoT đầu cuối: Thiết bị → Gateway → Đám mây">Designed end-to-end IoT architectures: Devices → Gateway → Cloud</li>
-                <li data-en="Implemented industrial protocols: MQTT, Modbus TCP, OPC UA, CoAP" data-vi="Triển khai giao thức công nghiệp: MQTT, Modbus TCP, OPC UA, CoAP">Implemented industrial protocols: MQTT, Modbus TCP, OPC UA, CoAP</li>
-                <li data-en="Developed data collection systems, REST APIs and integration services" data-vi="Phát triển hệ thống thu thập dữ liệu, REST API và dịch vụ tích hợp">Developed data collection systems, REST APIs and integration services</li>
-                <li data-en="Deployed AWS & Azure cloud infrastructure for IoT services" data-vi="Triển khai hạ tầng đám mây AWS & Azure cho dịch vụ IoT">Deployed AWS & Azure cloud infrastructure for IoT services</li>
-                <li data-en="Network security implementation: VPN, Firewall, TLS/SSL" data-vi="Triển khai bảo mật mạng: VPN, Firewall, TLS/SSL">Network security implementation: VPN, Firewall, TLS/SSL</li>
-              </ul>
-            </div>
-            <div>
-              <div class="detail-group-label impact" data-en="▸ Impact" data-vi="▸ Kết Quả">▸ Impact</div>
-              <ul class="detail-bullets impact">
-                <li data-en="Scalable infrastructure supporting hundreds of concurrent industrial nodes" data-vi="Hạ tầng có thể mở rộng hỗ trợ hàng trăm node công nghiệp đồng thời">Scalable infrastructure supporting hundreds of concurrent industrial nodes</li>
-                <li data-en="Reduced data latency ~35%, improved communication reliability" data-vi="Giảm độ trễ dữ liệu ~35%, nâng cao độ tin cậy truyền thông">Reduced data latency ~35%, improved communication reliability</li>
-              </ul>
-            </div>
-          </div>
-          <div class="tech-row">
-            <span class="tech-tag">MQTT</span><span class="tech-tag">OPC UA</span><span class="tech-tag">AWS IoT Core</span><span class="tech-tag">Azure IoT Hub</span><span class="tech-tag">CoAP</span><span class="tech-tag">REST API</span><span class="tech-tag">Fortinet</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- EXP 3 -->
-    <div class="exp-card" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon"><i class="fas fa-industry"></i></div>
-        <div class="card-meta">
-          <div class="card-title" data-en="SCADA & IIoT Engineer" data-vi="Kỹ Sư SCADA & IIoT">SCADA & IIoT Engineer</div>
-          <div class="card-sub">VIET AN ENVIRONMENT</div>
-        </div>
-        <div class="card-right">
-          <div class="card-period">2017 — 2021</div>
-          <div class="card-chevron"><i class="fas fa-chevron-down"></i></div>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-body-inner">
-          <div class="detail-illo">
-            <svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
-              <rect width="800" height="160" fill="#071223"/>
-              <!-- SCADA HMI Screen -->
-              <rect x="20" y="20" width="240" height="120" rx="4" fill="rgba(0,229,255,0.04)" stroke="rgba(0,229,255,0.35)" stroke-width="1.5"/>
-              <rect x="20" y="20" width="240" height="22" rx="4" fill="rgba(0,229,255,0.08)"/>
-              <text x="140" y="35" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="#00e5ff" letter-spacing="1">SCADA — WINCC HMI</text>
-              <!-- Gauges -->
-              <circle cx="65" cy="95" r="25" fill="none" stroke="rgba(0,229,255,0.2)" stroke-width="8"/>
-              <path d="M65 70 A25 25 0 1 1 42 112" fill="none" stroke="#00e5ff" stroke-width="8" stroke-linecap="round" opacity=".8"/>
-              <text x="65" y="99" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#00e5ff">pH</text>
-              <text x="65" y="110" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="white">7.2</text>
-              <circle cx="140" cy="95" r="25" fill="none" stroke="rgba(0,255,179,0.2)" stroke-width="8"/>
-              <path d="M140 70 A25 25 0 0 1 165 112" fill="none" stroke="#00ffb3" stroke-width="8" stroke-linecap="round" opacity=".8"/>
-              <text x="140" y="99" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#00ffb3">COD</text>
-              <text x="140" y="110" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="white">48</text>
-              <circle cx="215" cy="95" r="25" fill="none" stroke="rgba(168,85,247,0.2)" stroke-width="8"/>
-              <path d="M215 70 A25 25 0 1 0 192 112" fill="none" stroke="#a855f7" stroke-width="8" stroke-linecap="round" opacity=".8"/>
-              <text x="215" y="99" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#a855f7">TEMP</text>
-              <text x="215" y="110" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="white">28°C</text>
-              <!-- PLC Box -->
-              <rect x="290" y="30" width="140" height="100" rx="3" fill="rgba(0,255,179,0.04)" stroke="rgba(0,255,179,0.3)" stroke-width="1"/>
-              <rect x="290" y="30" width="140" height="18" fill="rgba(0,255,179,0.08)"/>
-              <text x="360" y="43" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#00ffb3">PLC SIEMENS S7</text>
-              <rect x="302" y="60" width="20" height="14" rx="1" fill="rgba(0,229,255,0.15)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
-              <rect x="328" y="60" width="20" height="14" rx="1" fill="rgba(0,229,255,0.15)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
-              <rect x="354" y="60" width="20" height="14" rx="1" fill="rgba(0,255,179,0.15)" stroke="rgba(0,255,179,0.4)" stroke-width="1"/>
-              <rect x="380" y="60" width="20" height="14" rx="1" fill="rgba(168,85,247,0.15)" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
-              <text x="312" y="71" text-anchor="middle" font-size="7" fill="rgba(0,229,255,0.8)">DI</text>
-              <text x="338" y="71" text-anchor="middle" font-size="7" fill="rgba(0,229,255,0.8)">DO</text>
-              <text x="364" y="71" text-anchor="middle" font-size="7" fill="rgba(0,255,179,0.8)">AI</text>
-              <text x="390" y="71" text-anchor="middle" font-size="7" fill="rgba(168,85,247,0.8)">AO</text>
-              <!-- LED indicators -->
-              <circle cx="310" cy="100" r="4" fill="#00ffb3"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite"/></circle>
-              <circle cx="325" cy="100" r="4" fill="#00e5ff"><animate attributeName="opacity" values="1;0.2;1" dur="1.3s" repeatCount="indefinite"/></circle>
-              <circle cx="340" cy="100" r="4" fill="#ff9d00"><animate attributeName="opacity" values="1;0.2;1" dur="0.8s" repeatCount="indefinite"/></circle>
-              <circle cx="355" cy="100" r="4" fill="#00ffb3"><animate attributeName="opacity" values="1;0.2;1" dur="1.5s" repeatCount="indefinite"/></circle>
-              <text x="360" y="120" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,255,179,0.5)">STATUS: RUNNING</text>
-              <!-- IoT Gateway -->
-              <rect x="460" y="30" width="100" height="60" rx="3" fill="rgba(168,85,247,0.05)" stroke="rgba(168,85,247,0.3)" stroke-width="1"/>
-              <text x="510" y="48" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#a855f7">IoT GW</text>
-              <text x="510" y="62" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(168,85,247,0.6)">LoRa / MQTT</text>
-              <!-- Wireless waves -->
-              <path d="M490 75 Q510 68 530 75" fill="none" stroke="rgba(168,85,247,0.5)" stroke-width="1.5"/>
-              <path d="M480 82 Q510 72 540 82" fill="none" stroke="rgba(168,85,247,0.3)" stroke-width="1"/>
-              <!-- Arrows -->
-              <line x1="430" y1="80" x2="460" y2="60" stroke="rgba(168,85,247,0.3)" stroke-width="1" stroke-dasharray="4 3"/>
-              <line x1="560" y1="60" x2="600" y2="40" stroke="rgba(0,229,255,0.3)" stroke-width="1" stroke-dasharray="4 3"/>
-              <!-- Database -->
-              <ellipse cx="640" cy="35" rx="50" ry="12" fill="rgba(0,229,255,0.06)" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
-              <rect x="590" y="35" width="100" height="40" fill="rgba(0,229,255,0.03)" stroke="none"/>
-              <line x1="590" y1="55" x2="690" y2="55" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
-              <ellipse cx="640" cy="75" rx="50" ry="12" fill="rgba(0,229,255,0.06)" stroke="rgba(0,229,255,0.3)" stroke-width="1"/>
-              <text x="640" y="58" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(0,229,255,0.7)">SQL SERVER</text>
-              <!-- Clients logos text -->
-              <text x="440" y="130" font-family="'Space Mono',monospace" font-size="8" fill="rgba(0,229,255,0.35)" letter-spacing="2">FORMOSA · SAMSUNG · TOYOTA · VINAMILK</text>
-            </svg>
-          </div>
-          <div class="detail-cols">
-            <div>
-              <div class="detail-group-label resp" data-en="// Responsibilities" data-vi="// Trách Nhiệm">// Responsibilities</div>
-              <ul class="detail-bullets resp">
-                <li data-en="Developed & deployed SCADA systems: WinCC, TIA Portal" data-vi="Phát triển & triển khai hệ thống SCADA: WinCC, TIA Portal">Developed & deployed SCADA systems: WinCC, TIA Portal</li>
-                <li data-en="Programmed Siemens S7-1200/1500 PLCs and configured HMI panels" data-vi="Lập trình PLC Siemens S7-1200/1500 và cấu hình màn hình HMI">Programmed Siemens S7-1200/1500 PLCs and configured HMI panels</li>
-                <li data-en="Integrated IoT systems: MQTT, LoRa, Sigfox for remote monitoring" data-vi="Tích hợp hệ thống IoT: MQTT, LoRa, Sigfox cho giám sát từ xa">Integrated IoT systems: MQTT, LoRa, Sigfox for remote monitoring</li>
-                <li data-en="Managed SQL databases, firewalls, and server infrastructure" data-vi="Quản lý cơ sở dữ liệu SQL, tường lửa và hạ tầng máy chủ">Managed SQL databases, firewalls, and server infrastructure</li>
-                <li data-en="Direct client engagement: Formosa, Samsung, Toyota, Vinamilk" data-vi="Làm việc trực tiếp với khách hàng: Formosa, Samsung, Toyota, Vinamilk">Direct client engagement: Formosa, Samsung, Toyota, Vinamilk</li>
-              </ul>
-            </div>
-            <div>
-              <div class="detail-group-label impact" data-en="▸ Impact" data-vi="▸ Kết Quả">▸ Impact</div>
-              <ul class="detail-bullets impact">
-                <li data-en="Operated & maintained 700+ stations across 150+ industrial facilities" data-vi="Vận hành & bảo trì 700+ trạm tại 150+ cơ sở công nghiệp">Operated & maintained 700+ stations across 150+ industrial facilities</li>
-                <li data-en="Built foundational IoT & SCADA infrastructure as core service offering" data-vi="Xây dựng nền tảng IoT & SCADA trở thành dịch vụ cốt lõi công ty">Built foundational IoT & SCADA infrastructure as core service offering</li>
-                <li data-en="Outstanding Employee — 2019, 2020, 2021" data-vi="Nhân Viên Xuất Sắc — 2019, 2020, 2021">Outstanding Employee — 2019, 2020, 2021</li>
-              </ul>
-            </div>
-          </div>
-          <div class="tech-row">
-            <span class="tech-tag">WinCC</span><span class="tech-tag">TIA Portal</span><span class="tech-tag">S7-1500</span><span class="tech-tag">LoRa</span><span class="tech-tag">Sigfox</span><span class="tech-tag">Modbus</span><span class="tech-tag">SQL Server</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <div class="hs-bar"><i id="hsbar"></i></div>
+    <div class="hs-count mono"><span>2017</span><span id="hsnum">01 / 03</span><span>2025</span></div>
   </div>
 </section>
 
-<!-- ══ PROJECTS ══ -->
-<section class="section reveal">
-  <div class="sec-head">
-    <span class="sec-num">04</span>
-    <span class="sec-title-text" data-en="Selected Projects" data-vi="Dự Án Tiêu Biểu">Selected Projects</span>
-    <div class="sec-line"></div><div class="sec-dot"></div>
-  </div>
-  <div class="proj-list">
-
-    <div class="proj-card-item" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon"><i class="fas fa-tower-broadcast"></i></div>
-        <div class="card-meta">
-          <div class="card-title" data-en="Environmental Monitoring System (ENVIDATA)" data-vi="Hệ Thống Quan Trắc Môi Trường (ENVIDATA)">Environmental Monitoring System (ENVIDATA)</div>
-          <div class="card-sub" data-en="500+ STATIONS · REAL-TIME · COMPLIANCE" data-vi="500+ TRẠM · THỜI GIAN THỰC · TUÂN THỦ">500+ STATIONS · REAL-TIME · COMPLIANCE</div>
-        </div>
-        <div class="card-right"><div class="card-chevron"><i class="fas fa-chevron-down"></i></div></div>
-      </div>
-      <div class="card-body">
-        <div class="card-body-inner">
-          <div class="detail-illo">
-            <svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
-              <rect width="800" height="160" fill="#071223"/>
-              <!-- Real-time chart -->
-              <rect x="20" y="20" width="500" height="120" rx="3" fill="rgba(0,229,255,0.03)" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
-              <text x="270" y="38" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="rgba(0,229,255,0.6)" letter-spacing="1">ENVIDATA — REAL-TIME MONITORING DASHBOARD</text>
-              <!-- Chart grid -->
-              <line x1="40" y1="50" x2="510" y2="50" stroke="rgba(0,229,255,0.05)" stroke-width="1"/>
-              <line x1="40" y1="75" x2="510" y2="75" stroke="rgba(0,229,255,0.05)" stroke-width="1"/>
-              <line x1="40" y1="100" x2="510" y2="100" stroke="rgba(0,229,255,0.05)" stroke-width="1"/>
-              <!-- pH line -->
-              <polyline points="40,95 80,88 120,92 160,80 200,86 240,75 280,82 320,70 360,78 400,65 440,72 480,62 510,68" fill="none" stroke="#00e5ff" stroke-width="2"/>
-              <!-- COD line -->
-              <polyline points="40,105 80,100 120,108 160,98 200,103 240,95 280,102 320,90 360,97 400,88 440,94 480,85 510,90" fill="none" stroke="#00ffb3" stroke-width="2" opacity=".8"/>
-              <!-- TSS line -->
-              <polyline points="40,115 80,110 120,118 160,108 200,114 240,105 280,112 320,103 360,110 400,100 440,106 480,98 510,103" fill="none" stroke="#a855f7" stroke-width="2" opacity=".8"/>
-              <!-- Live dot -->
-              <circle cx="510" cy="68" r="5" fill="#00e5ff"><animate attributeName="r" values="5;8;5" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/></circle>
-              <!-- Legend -->
-              <rect x="40" y="125" width="8" height="3" fill="#00e5ff"/>
-              <text x="52" y="130" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,229,255,0.7)">pH</text>
-              <rect x="80" y="125" width="8" height="3" fill="#00ffb3"/>
-              <text x="92" y="130" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,255,179,0.7)">COD</text>
-              <rect x="122" y="125" width="8" height="3" fill="#a855f7"/>
-              <text x="134" y="130" font-family="'Space Mono',monospace" font-size="7" fill="rgba(168,85,247,0.7)">TSS</text>
-              <text x="490" y="130" text-anchor="end" font-family="'Space Mono',monospace" font-size="8" fill="rgba(0,229,255,0.4)">LIVE ●</text>
-              <!-- Alert panel -->
-              <rect x="545" y="20" width="235" height="120" rx="3" fill="rgba(0,229,255,0.04)" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
-              <rect x="545" y="20" width="235" height="20" fill="rgba(255,157,0,0.08)"/>
-              <text x="662" y="34" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#ff9d00">⚠ ALERT SYSTEM</text>
-              <rect x="555" y="48" width="215" height="14" rx="2" fill="rgba(0,229,255,0.06)" stroke="rgba(0,229,255,0.15)" stroke-width="1"/>
-              <circle cx="565" cy="55" r="3" fill="#00ffb3"/>
-              <text x="574" y="59" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,229,255,0.7)">Station #042 — pH OK [7.1]</text>
-              <rect x="555" y="66" width="215" height="14" rx="2" fill="rgba(255,157,0,0.06)" stroke="rgba(255,157,0,0.2)" stroke-width="1"/>
-              <circle cx="565" cy="73" r="3" fill="#ff9d00"><animate attributeName="opacity" values="1;0.2;1" dur="0.8s" repeatCount="indefinite"/></circle>
-              <text x="574" y="77" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,157,0,0.8)">Station #118 — COD HIGH!</text>
-              <rect x="555" y="84" width="215" height="14" rx="2" fill="rgba(0,229,255,0.06)" stroke="rgba(0,229,255,0.15)" stroke-width="1"/>
-              <circle cx="565" cy="91" r="3" fill="#00ffb3"/>
-              <text x="574" y="95" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,229,255,0.7)">Station #276 — Normal</text>
-              <rect x="555" y="102" width="215" height="14" rx="2" fill="rgba(168,85,247,0.06)" stroke="rgba(168,85,247,0.2)" stroke-width="1"/>
-              <circle cx="565" cy="109" r="3" fill="#a855f7"/>
-              <text x="574" y="113" font-family="'Space Mono',monospace" font-size="7" fill="rgba(168,85,247,0.8)">Station #389 — Reporting</text>
-              <text x="662" y="130" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,229,255,0.4)">500 STATIONS ONLINE</text>
-            </svg>
-          </div>
-          <div class="detail-cols">
-            <div>
-              <div class="detail-group-label about" data-en="◆ About" data-vi="◆ Mô Tả">◆ About</div>
-              <ul class="detail-bullets about">
-                <li data-en="Real-time monitoring for 500+ environmental stations nationwide" data-vi="Giám sát thời gian thực 500+ trạm quan trắc môi trường toàn quốc">Real-time monitoring for 500+ environmental stations nationwide</li>
-                <li data-en="Parameters: pH, COD, TSS, DO, Temperature, Flow rate" data-vi="Thông số: pH, COD, TSS, DO, Nhiệt độ, Lưu lượng">Parameters: pH, COD, TSS, DO, Temperature, Flow rate</li>
-                <li data-en="Automated alerting for threshold violations & compliance reporting" data-vi="Cảnh báo tự động khi vượt ngưỡng & báo cáo tuân thủ">Automated alerting for threshold violations & compliance reporting</li>
-                <li data-en="Live Chart.js dashboards, data export to regulatory authorities" data-vi="Dashboard Chart.js trực tiếp, xuất dữ liệu cho cơ quan quản lý">Live Chart.js dashboards, data export to regulatory authorities</li>
-              </ul>
-            </div>
-            <div>
-              <div class="detail-group-label impact" data-en="▸ Impact" data-vi="▸ Kết Quả">▸ Impact</div>
-              <ul class="detail-bullets impact">
-                <li data-en="National coverage: 500+ active monitoring stations" data-vi="Phủ sóng toàn quốc: 500+ trạm quan trắc hoạt động">National coverage: 500+ active monitoring stations</li>
-                <li data-en="Environmental compliance rate improved across all client factories" data-vi="Tỷ lệ tuân thủ môi trường được cải thiện tại tất cả nhà máy">Environmental compliance rate improved across all client factories</li>
-              </ul>
-            </div>
-          </div>
-          <div class="tech-row"><span class="tech-tag">HTML/JS</span><span class="tech-tag">Chart.js</span><span class="tech-tag">Modbus TCP</span><span class="tech-tag">MQTT</span><span class="tech-tag">SQL Server</span><span class="tech-tag">Python</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="proj-card-item" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-        <div class="card-meta">
-          <div class="card-title" data-en="Power Platform Business System" data-vi="Hệ Thống Nghiệp Vụ Power Platform">Power Platform Business System</div>
-          <div class="card-sub" data-en="CONTRACT · DEBT · KPI · AUTOMATION" data-vi="HỢP ĐỒNG · CÔNG NỢ · KPI · TỰ ĐỘNG HÓA">CONTRACT · DEBT · KPI · AUTOMATION</div>
-        </div>
-        <div class="card-right"><div class="card-chevron"><i class="fas fa-chevron-down"></i></div></div>
-      </div>
-      <div class="card-body">
-        <div class="card-body-inner">
-          <div class="detail-illo">
-            <svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
-              <rect width="800" height="160" fill="#071223"/>
-              <!-- Power Platform flow -->
-              <!-- SharePoint -->
-              <rect x="20" y="45" width="100" height="70" rx="3" fill="rgba(0,229,255,0.05)" stroke="rgba(0,229,255,0.25)" stroke-width="1"/>
-              <text x="70" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#00e5ff">SharePoint</text>
-              <rect x="30" y="75" width="80" height="10" rx="1" fill="rgba(0,229,255,0.12)"/>
-              <rect x="30" y="89" width="60" height="10" rx="1" fill="rgba(0,229,255,0.08)"/>
-              <rect x="30" y="103" width="70" height="10" rx="1" fill="rgba(0,229,255,0.06)"/>
-              <!-- Arrow -->
-              <line x1="120" y1="80" x2="165" y2="80" stroke="rgba(0,229,255,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
-              <polygon points="163,76 173,80 163,84" fill="rgba(0,229,255,0.5)"/>
-              <!-- Power Automate -->
-              <rect x="173" y="35" width="130" height="90" rx="3" fill="rgba(0,255,179,0.04)" stroke="rgba(0,255,179,0.3)" stroke-width="1"/>
-              <rect x="173" y="35" width="130" height="20" fill="rgba(0,255,179,0.06)"/>
-              <text x="238" y="49" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#00ffb3">Power Automate</text>
-              <!-- Flow steps -->
-              <rect x="183" y="60" width="110" height="12" rx="2" fill="rgba(0,255,179,0.1)" stroke="rgba(0,255,179,0.2)" stroke-width=".5"/>
-              <text x="238" y="70" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,255,179,0.7)">▸ Trigger: New Record</text>
-              <rect x="183" y="76" width="110" height="12" rx="2" fill="rgba(0,255,179,0.1)" stroke="rgba(0,255,179,0.2)" stroke-width=".5"/>
-              <text x="238" y="86" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,255,179,0.7)">▸ Approve / Notify</text>
-              <rect x="183" y="92" width="110" height="12" rx="2" fill="rgba(0,255,179,0.1)" stroke="rgba(0,255,179,0.2)" stroke-width=".5"/>
-              <text x="238" y="102" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,255,179,0.7)">▸ Update Dataverse</text>
-              <rect x="183" y="108" width="110" height="12" rx="2" fill="rgba(0,255,179,0.1)" stroke="rgba(0,255,179,0.2)" stroke-width=".5"/>
-              <text x="238" y="118" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,255,179,0.7)">▸ Teams Alert</text>
-              <!-- Arrow -->
-              <line x1="303" y1="80" x2="340" y2="80" stroke="rgba(0,229,255,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
-              <polygon points="338,76 348,80 338,84" fill="rgba(0,229,255,0.5)"/>
-              <!-- Power Apps -->
-              <rect x="348" y="45" width="120" height="70" rx="3" fill="rgba(168,85,247,0.05)" stroke="rgba(168,85,247,0.3)" stroke-width="1"/>
-              <text x="408" y="62" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#a855f7">Power Apps</text>
-              <!-- Mock app screen -->
-              <rect x="360" y="68" width="96" height="40" rx="2" fill="rgba(168,85,247,0.08)"/>
-              <rect x="364" y="72" width="50" height="6" rx="1" fill="rgba(168,85,247,0.3)"/>
-              <rect x="364" y="81" width="88" height="4" rx="1" fill="rgba(168,85,247,0.15)"/>
-              <rect x="364" y="88" width="70" height="4" rx="1" fill="rgba(168,85,247,0.15)"/>
-              <rect x="364" y="95" width="40" height="8" rx="2" fill="rgba(168,85,247,0.3)"/>
-              <text x="384" y="103" text-anchor="middle" font-family="'Space Mono',monospace" font-size="6" fill="rgba(168,85,247,0.8)">SUBMIT</text>
-              <!-- Arrow -->
-              <line x1="468" y1="80" x2="510" y2="80" stroke="rgba(0,229,255,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
-              <polygon points="508,76 518,80 508,84" fill="rgba(0,229,255,0.5)"/>
-              <!-- Power BI -->
-              <rect x="518" y="30" width="260" height="100" rx="3" fill="rgba(0,229,255,0.03)" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
-              <text x="648" y="48" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(0,229,255,0.7)">Power BI — KPI DASHBOARD</text>
-              <!-- Bar chart in BI -->
-              <rect x="530" y="88" width="18" height="30" fill="rgba(0,229,255,0.3)"/>
-              <rect x="554" y="78" width="18" height="40" fill="rgba(0,229,255,0.4)"/>
-              <rect x="578" y="70" width="18" height="48" fill="rgba(0,229,255,0.5)"/>
-              <rect x="602" y="82" width="18" height="36" fill="rgba(0,255,179,0.4)"/>
-              <rect x="626" y="65" width="18" height="53" fill="rgba(0,229,255,0.5)"/>
-              <line x1="530" y1="120" x2="760" y2="120" stroke="rgba(0,229,255,0.15)" stroke-width="1"/>
-              <!-- Donut KPI -->
-              <circle cx="720" cy="88" r="26" fill="none" stroke="rgba(0,229,255,0.12)" stroke-width="10"/>
-              <path d="M720 62 A26 26 0 1 1 697 114" fill="none" stroke="#00e5ff" stroke-width="10" stroke-linecap="round" opacity=".8"/>
-              <text x="720" y="92" text-anchor="middle" font-family="'Space Mono',monospace" font-size="10" fill="#00e5ff">87%</text>
-              <text x="720" y="126" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,229,255,0.5)">KPI MET</text>
-            </svg>
-          </div>
-          <div class="detail-cols">
-            <div>
-              <div class="detail-group-label about" data-en="◆ About" data-vi="◆ Mô Tả">◆ About</div>
-              <ul class="detail-bullets about">
-                <li data-en="Contract lifecycle management from proposal to payment" data-vi="Quản lý vòng đời hợp đồng từ đề xuất đến thanh toán">Contract lifecycle management from proposal to payment</li>
-                <li data-en="Debt & receivables tracking with automated follow-up workflows" data-vi="Theo dõi công nợ & phải thu với quy trình nhắc nhở tự động">Debt & receivables tracking with automated follow-up workflows</li>
-                <li data-en="KPI dashboards for management decision-making" data-vi="Dashboard KPI cho ban lãnh đạo ra quyết định">KPI dashboards for management decision-making</li>
-                <li data-en="Teams notifications & SharePoint document integration" data-vi="Thông báo Teams & tích hợp tài liệu SharePoint">Teams notifications & SharePoint document integration</li>
-              </ul>
-            </div>
-            <div>
-              <div class="detail-group-label impact" data-en="▸ Impact" data-vi="▸ Kết Quả">▸ Impact</div>
-              <ul class="detail-bullets impact">
-                <li data-en="Eliminated manual tracking, reduced admin workload significantly" data-vi="Loại bỏ theo dõi thủ công, giảm đáng kể khối lượng hành chính">Eliminated manual tracking, reduced admin workload significantly</li>
-                <li data-en="Full visibility into business operations and project status" data-vi="Tầm nhìn toàn diện về hoạt động kinh doanh và trạng thái dự án">Full visibility into business operations and project status</li>
-              </ul>
-            </div>
-          </div>
-          <div class="tech-row"><span class="tech-tag">Power Apps</span><span class="tech-tag">Power Automate</span><span class="tech-tag">Power BI</span><span class="tech-tag">SharePoint</span><span class="tech-tag">Dataverse</span><span class="tech-tag">MS Teams</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="proj-card-item" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon"><i class="fas fa-robot"></i></div>
-        <div class="card-meta">
-          <div class="card-title" data-en="AI Vision Automation Tool" data-vi="Công Cụ Tự Động Hóa AI Vision">AI Vision Automation Tool</div>
-          <div class="card-sub" data-en="PYTHON · OPENCV · REAL-TIME DETECTION" data-vi="PYTHON · OPENCV · PHÁT HIỆN THỜI GIAN THỰC">PYTHON · OPENCV · REAL-TIME DETECTION</div>
-        </div>
-        <div class="card-right"><div class="card-chevron"><i class="fas fa-chevron-down"></i></div></div>
-      </div>
-      <div class="card-body">
-        <div class="card-body-inner">
-          <div class="detail-illo">
-            <svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
-              <rect width="800" height="160" fill="#071223"/>
-              <!-- Camera feed mockup -->
-              <rect x="20" y="20" width="240" height="120" rx="3" fill="#030810" stroke="rgba(0,229,255,0.3)" stroke-width="1.5"/>
-              <!-- Detection boxes -->
-              <rect x="55" y="45" width="70" height="65" fill="none" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="5 3"/>
-              <rect x="150" y="55" width="55" height="55" fill="none" stroke="#00ffb3" stroke-width="1.5" stroke-dasharray="5 3"/>
-              <!-- Corner markers -->
-              <line x1="55" y1="45" x2="65" y2="45" stroke="#00e5ff" stroke-width="2"/>
-              <line x1="55" y1="45" x2="55" y2="55" stroke="#00e5ff" stroke-width="2"/>
-              <line x1="125" y1="45" x2="115" y2="45" stroke="#00e5ff" stroke-width="2"/>
-              <line x1="125" y1="45" x2="125" y2="55" stroke="#00e5ff" stroke-width="2"/>
-              <line x1="55" y1="110" x2="65" y2="110" stroke="#00e5ff" stroke-width="2"/>
-              <line x1="55" y1="110" x2="55" y2="100" stroke="#00e5ff" stroke-width="2"/>
-              <line x1="125" y1="110" x2="115" y2="110" stroke="#00e5ff" stroke-width="2"/>
-              <line x1="125" y1="110" x2="125" y2="100" stroke="#00e5ff" stroke-width="2"/>
-              <!-- Object shapes -->
-              <ellipse cx="90" cy="77" rx="25" ry="25" fill="rgba(0,229,255,0.06)" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
-              <rect x="158" y="65" width="38" height="35" rx="2" fill="rgba(0,255,179,0.06)" stroke="rgba(0,255,179,0.2)" stroke-width="1"/>
-              <!-- Labels -->
-              <rect x="55" y="35" width="50" height="10" rx="2" fill="#00e5ff"/>
-              <text x="80" y="44" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="#000">OBJ 98%</text>
-              <rect x="150" y="45" width="50" height="10" rx="2" fill="#00ffb3"/>
-              <text x="175" y="54" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="#000">OBJ 94%</text>
-              <!-- Scan line -->
-              <line x1="20" y1="90" x2="260" y2="90" stroke="rgba(0,229,255,0.4)" stroke-width="1">
-                <animate attributeName="y1" values="20;140;20" dur="3s" repeatCount="indefinite"/>
-                <animate attributeName="y2" values="20;140;20" dur="3s" repeatCount="indefinite"/>
-              </line>
-              <text x="140" y="15" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(0,229,255,0.5)">CAMERA FEED</text>
-              <!-- Processing pipeline -->
-              <rect x="280" y="20" width="500" height="120" rx="3" fill="rgba(0,229,255,0.02)" stroke="rgba(0,229,255,0.1)" stroke-width="1"/>
-              <text x="530" y="38" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(0,229,255,0.5)" letter-spacing="1">AI PROCESSING PIPELINE</text>
-              <!-- Steps -->
-              <rect x="290" y="50" width="80" height="40" rx="2" fill="rgba(0,229,255,0.05)" stroke="rgba(0,229,255,0.2)" stroke-width="1"/>
-              <text x="330" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#00e5ff">OpenCV</text>
-              <text x="330" y="82" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,229,255,0.5)">Pre-process</text>
-              <line x1="370" y1="70" x2="400" y2="70" stroke="rgba(0,229,255,0.3)" stroke-width="1.5"/>
-              <polygon points="398,67 406,70 398,73" fill="rgba(0,229,255,0.5)"/>
-              <rect x="406" y="50" width="80" height="40" rx="2" fill="rgba(0,255,179,0.05)" stroke="rgba(0,255,179,0.2)" stroke-width="1"/>
-              <text x="446" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#00ffb3">Model</text>
-              <text x="446" y="82" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(0,255,179,0.5)">Inference</text>
-              <line x1="486" y1="70" x2="516" y2="70" stroke="rgba(0,229,255,0.3)" stroke-width="1.5"/>
-              <polygon points="514,67 522,70 514,73" fill="rgba(0,229,255,0.5)"/>
-              <rect x="522" y="50" width="80" height="40" rx="2" fill="rgba(168,85,247,0.05)" stroke="rgba(168,85,247,0.2)" stroke-width="1"/>
-              <text x="562" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#a855f7">Detect</text>
-              <text x="562" y="82" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(168,85,247,0.5)">& Classify</text>
-              <line x1="602" y1="70" x2="632" y2="70" stroke="rgba(0,229,255,0.3)" stroke-width="1.5"/>
-              <polygon points="630,67 638,70 630,73" fill="rgba(0,229,255,0.5)"/>
-              <rect x="638" y="50" width="80" height="40" rx="2" fill="rgba(255,157,0,0.05)" stroke="rgba(255,157,0,0.2)" stroke-width="1"/>
-              <text x="678" y="68" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#ff9d00">Control</text>
-              <text x="678" y="82" text-anchor="middle" font-family="'Space Mono',monospace" font-size="7" fill="rgba(255,157,0,0.5)">& Alert</text>
-              <!-- Stats -->
-              <text x="330" y="118" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(0,229,255,0.5)">FPS: 30</text>
-              <text x="446" y="118" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(0,255,179,0.5)">ACC: 97%</text>
-              <text x="562" y="118" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(168,85,247,0.5)">LATENCY: 18ms</text>
-              <text x="678" y="118" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(255,157,0,0.5)">UPTIME: 99%</text>
-            </svg>
-          </div>
-          <div class="detail-cols">
-            <div>
-              <div class="detail-group-label about" data-en="◆ About" data-vi="◆ Mô Tả">◆ About</div>
-              <ul class="detail-bullets about">
-                <li data-en="Python-based computer vision for industrial quality inspection" data-vi="Thị giác máy tính Python cho kiểm tra chất lượng công nghiệp">Python-based computer vision for industrial quality inspection</li>
-                <li data-en="Real-time object detection & classification at 30 FPS" data-vi="Phát hiện & phân loại đối tượng thời gian thực ở 30 FPS">Real-time object detection & classification at 30 FPS</li>
-                <li data-en="Automated control signals to PLC based on detection results" data-vi="Tín hiệu điều khiển tự động đến PLC dựa trên kết quả phát hiện">Automated control signals to PLC based on detection results</li>
-                <li data-en="Alert system with notification for anomaly detection" data-vi="Hệ thống cảnh báo với thông báo khi phát hiện bất thường">Alert system with notification for anomaly detection</li>
-              </ul>
-            </div>
-            <div>
-              <div class="detail-group-label impact" data-en="▸ Impact" data-vi="▸ Kết Quả">▸ Impact</div>
-              <ul class="detail-bullets impact">
-                <li data-en="Replaced manual visual inspection with automated AI detection" data-vi="Thay thế kiểm tra thủ công bằng phát hiện AI tự động">Replaced manual visual inspection with automated AI detection</li>
-                <li data-en="97% detection accuracy, 18ms latency, 99% system uptime" data-vi="Độ chính xác phát hiện 97%, độ trễ 18ms, uptime hệ thống 99%">97% detection accuracy, 18ms latency, 99% system uptime</li>
-              </ul>
-            </div>
-          </div>
-          <div class="tech-row"><span class="tech-tag">Python</span><span class="tech-tag">OpenCV</span><span class="tech-tag">YOLOv8</span><span class="tech-tag">NumPy</span><span class="tech-tag">Real-time</span><span class="tech-tag">PLC Integration</span></div>
-        </div>
-      </div>
-    </div>
-
-  </div>
+<!-- ═════════ PROJECTS ═════════ -->
+<section class="sec wrap" id="projects">
+  <div class="kicker mono rv"><span class="n">04</span><span class="scr" data-en="Selected Projects" data-vi="Dự án tiêu biểu">Selected Projects</span><span class="ln"></span><span data-en="Click to open" data-vi="Bấm để xem">Click to open</span></div>
+  <div class="plist" id="plist"></div>
 </section>
 
-<!-- ══ ACHIEVEMENTS ══ -->
-<section class="section reveal">
-  <div class="sec-head">
-    <span class="sec-num">05</span>
-    <span class="sec-title-text" data-en="Achievements" data-vi="Thành Tích">Achievements</span>
-    <div class="sec-line"></div><div class="sec-dot"></div>
-  </div>
-  <div class="ach-list">
-    <div class="ach-card-item" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon"><span class="card-emoji">🏆</span></div>
-        <div class="card-meta">
-          <div class="card-title" data-en="Innovation Employee of the Year — 2024" data-vi="Nhân Viên Sáng Tạo Của Năm — 2024">Innovation Employee of the Year — 2024</div>
-          <div class="card-sub" data-en="VIET AN ENVIRONMENT" data-vi="VIET AN ENVIRONMENT">VIET AN ENVIRONMENT</div>
-        </div>
-        <div class="card-right"><div class="card-chevron"><i class="fas fa-chevron-down"></i></div></div>
-      </div>
-      <div class="card-body">
-        <div class="card-body-inner">
-          <ul class="detail-bullets about" style="margin-top:20px;">
-            <li data-en="Recognized for building breakthrough AI and automation tools that transformed field operations" data-vi="Được ghi nhận vì xây dựng công cụ AI và tự động hóa đột phá, cải tiến hoạt động hiện trường">Recognized for building breakthrough AI and automation tools that transformed field operations</li>
-            <li data-en="Led digital transformation initiatives across monitoring infrastructure" data-vi="Dẫn dắt các sáng kiến chuyển đổi số trong hạ tầng quan trắc">Led digital transformation initiatives across monitoring infrastructure</li>
-            <li data-en="Proposed and delivered internal tooling that reduced manual workload by >50%" data-vi="Đề xuất và triển khai công cụ nội bộ giúp giảm khối lượng thủ công >50%">Proposed and delivered internal tooling that reduced manual workload by >50%</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="ach-card-item" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon"><span class="card-emoji">⭐</span></div>
-        <div class="card-meta">
-          <div class="card-title" data-en="Outstanding Employee — 2019, 2020, 2021, 2022, 2023" data-vi="Nhân Viên Xuất Sắc — 2019, 2020, 2021, 2022, 2023">Outstanding Employee — 2019, 2020, 2021, 2022, 2023</div>
-          <div class="card-sub" data-en="5 CONSECUTIVE YEARS" data-vi="5 NĂM LIÊN TIẾP">5 CONSECUTIVE YEARS</div>
-        </div>
-        <div class="card-right"><div class="card-chevron"><i class="fas fa-chevron-down"></i></div></div>
-      </div>
-      <div class="card-body">
-        <div class="card-body-inner">
-          <ul class="detail-bullets about" style="margin-top:20px;">
-            <li data-en="5 consecutive years of recognition — among the highest in company history" data-vi="5 năm liên tiếp được công nhận — thuộc hàng cao nhất trong lịch sử công ty">5 consecutive years of recognition — among the highest in company history</li>
-            <li data-en="Praised for technical depth, problem-solving under pressure, and client satisfaction" data-vi="Được đánh giá cao về chiều sâu kỹ thuật, giải quyết vấn đề dưới áp lực và sự hài lòng của khách hàng">Praised for technical depth, problem-solving under pressure, and client satisfaction</li>
-            <li data-en="Maintained high performance across SCADA, IoT, and team leadership roles" data-vi="Duy trì hiệu suất cao trong các vai trò SCADA, IoT và lãnh đạo nhóm">Maintained high performance across SCADA, IoT, and team leadership roles</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="ach-card-item" onclick="toggleCard(this)">
-      <div class="card-header">
-        <div class="card-icon"><span class="card-emoji">🏭</span></div>
-        <div class="card-meta">
-          <div class="card-title" data-en="Enterprise Client Delivery" data-vi="Triển Khai Cho Khách Hàng Doanh Nghiệp">Enterprise Client Delivery</div>
-          <div class="card-sub">FORMOSA · SAMSUNG · TOYOTA · VINAMILK</div>
-        </div>
-        <div class="card-right"><div class="card-chevron"><i class="fas fa-chevron-down"></i></div></div>
-      </div>
-      <div class="card-body">
-        <div class="card-body-inner">
-          <ul class="detail-bullets about" style="margin-top:20px;">
-            <li data-en="Delivered full SCADA & IoT monitoring systems for Vietnam's largest manufacturing clients" data-vi="Triển khai hệ thống SCADA & IoT hoàn chỉnh cho các khách hàng sản xuất lớn nhất Việt Nam">Delivered full SCADA & IoT monitoring systems for Vietnam's largest manufacturing clients</li>
-            <li data-en="Formosa Ha Tinh Steel — large-scale environmental monitoring compliance system" data-vi="Formosa Hà Tĩnh Steel — hệ thống tuân thủ quan trắc môi trường quy mô lớn">Formosa Ha Tinh Steel — large-scale environmental monitoring compliance system</li>
-            <li data-en="Samsung, Toyota, Vinamilk — real-time process monitoring and EMS integration" data-vi="Samsung, Toyota, Vinamilk — giám sát quy trình thời gian thực và tích hợp EMS">Samsung, Toyota, Vinamilk — real-time process monitoring and EMS integration</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="pv" id="pv" aria-hidden="true"><div class="pv-in" id="pvin"></div></div>
+<dialog class="dr" id="dr" aria-labelledby="drt"><div class="dr-in" id="drin"></div></dialog>
+
+<!-- ═════════ AWARDS ═════════ -->
+<section class="sec wrap" id="awards" style="padding-top:0">
+  <div class="kicker mono rv"><span class="n">05</span><span class="scr" data-en="Achievements" data-vi="Thành tích">Achievements</span><span class="ln"></span><span>HALL.OF.FAME</span></div>
+  <div class="stackc" id="stackc"></div>
 </section>
 
-<!-- ══ EDUCATION ══ -->
-<section class="section reveal">
-  <div class="sec-head">
-    <span class="sec-num">06</span>
-    <span class="sec-title-text" data-en="Education" data-vi="Học Vấn">Education</span>
-    <div class="sec-line"></div><div class="sec-dot"></div>
-  </div>
-  <div class="edu-card">
-    <div class="edu-icon">🎓</div>
+<!-- ═════════ EDUCATION ═════════ -->
+<section class="wrap" id="education">
+  <div class="kicker mono rv"><span class="n">06</span><span class="scr" data-en="Education" data-vi="Học vấn">Education</span><span class="ln"></span><span>DEGREE.BIN</span></div>
+  <div class="edu rv">
     <div>
-      <div class="edu-deg" data-en="Control Engineering & Automation" data-vi="Kỹ Thuật Điều Khiển & Tự Động Hóa">Control Engineering & Automation</div>
-      <div class="edu-school" data-en="NONG LAM UNIVERSITY HO CHI MINH CITY" data-vi="ĐẠI HỌC NÔNG LÂM TP. HỒ CHÍ MINH">NONG LAM UNIVERSITY HO CHI MINH CITY</div>
-      <div class="edu-meta" data-en="2013 — 2017  ·  CLASSIFICATION: GOOD" data-vi="2013 — 2017  ·  XẾP LOẠI: KHÁ">2013 — 2017  ·  CLASSIFICATION: GOOD</div>
+      <h3 data-en="Control Engineering &amp; Automation" data-vi="Kỹ thuật Điều khiển &amp; Tự động hóa">Control Engineering &amp; Automation</h3>
+      <p class="mono" data-en="Nong Lam University — Ho Chi Minh City · Classification: Good" data-vi="Đại học Nông Lâm — TP. Hồ Chí Minh · Xếp loại: Khá">Nong Lam University — Ho Chi Minh City · Classification: Good</p>
     </div>
+    <div class="yr">2013—17</div>
   </div>
 </section>
 
-<footer>
-  <div class="foot-name">NGO VIET DINH</div>
-  <div class="foot-txt" data-en="SENIOR IOT / SCADA ENGINEER  ·  SOLUTION ARCHITECT  ·  DA NANG, VIETNAM" data-vi="KỸ SƯ IoT / SCADA CẤP CAO  ·  KIẾN TRÚC SƯ GIẢI PHÁP  ·  ĐÀ NẴNG, VIỆT NAM">SENIOR IOT / SCADA ENGINEER  ·  SOLUTION ARCHITECT  ·  DA NANG, VIETNAM</div>
-</footer>
+<!-- ═════════ CONTACT ═════════ -->
+<section class="contact wrap" id="contact">
+  <div class="kicker mono rv"><span class="n">07</span><span class="scr" data-en="Contact" data-vi="Liên hệ">Contact</span></div>
+  <h2 class="cta">
+    <span class="mask rv"><span data-en="Let’s build" data-vi="Cùng xây dựng">Let’s build</span></span>
+    <span class="mask rv"><span class="serif" data-en="resilient systems." data-vi="hệ thống bền vững.">resilient systems.</span></span>
+  </h2>
+  <div class="cta-btns">
+    <button class="btn pri mag" id="copy" data-cur="COPY"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>gsnvbu@gmail.com</button>
+    <a class="btn mag" href="tel:0339258546" data-cur="CALL"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>0339 258 546</a>
+    <button class="btn mag" id="print" data-cur="PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg><span data-en="Save as PDF" data-vi="Lưu PDF">Save as PDF</span></button>
+  </div>
+  <footer class="foot mono">
+    <span>© 2026 Ngô Viết Định</span>
+    <span data-en="Senior IoT / SCADA Engineer · Solution Architect · Da Nang" data-vi="Kỹ sư IoT / SCADA cấp cao · Kiến trúc sư giải pháp · Đà Nẵng">Senior IoT / SCADA Engineer · Solution Architect · Da Nang</span>
+    <button id="totop" data-en="Back to top ↑" data-vi="Lên đầu trang ↑">Back to top ↑</button>
+  </footer>
+</section>
 
-</div><!-- /wrap -->
+</main>
+
+<div class="toast mono" id="toast" role="status"><i></i><span id="toastt">Copied</span></div>
 
 <script>
-// ── CURSOR ──
-const cur = document.getElementById('cursor');
-const cring = document.getElementById('cring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => {
-  mx=e.clientX; my=e.clientY;
-  cur.style.left=mx+'px'; cur.style.top=my+'px';
-});
-(function animR(){
-  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
-  cring.style.left=rx+'px'; cring.style.top=ry+'px';
-  requestAnimationFrame(animR);
-})();
-document.querySelectorAll('a,button,.exp-card,.proj-card-item,.ach-card-item,.skill-cat,.stag').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';cring.style.width='48px';cring.style.height='48px';});
-  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';cring.style.width='32px';cring.style.height='32px';});
-});
+(()=>{
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FINE=matchMedia('(hover:hover) and (pointer:fine)').matches;
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const esc=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+const T=(en,vi)=>`data-en="${esc(en)}" data-vi="${esc(vi)}"`;
 
-// ── CANVAS ──
-const cv = document.getElementById('bgCanvas');
-const ctx = cv.getContext('2d');
-let W,H,nodes=[];
-function resize(){ W=cv.width=window.innerWidth; H=cv.height=window.innerHeight; }
-resize(); window.addEventListener('resize',resize);
-class Node{
-  constructor(){ this.x=Math.random()*W; this.y=Math.random()*H; this.vx=(Math.random()-.5)*.25; this.vy=(Math.random()-.5)*.25; this.r=Math.random()*1.5+.5; this.a=Math.random()*.4+.1; }
-  update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>W)this.vx*=-1; if(this.y<0||this.y>H)this.vy*=-1; }
-  draw(){ ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fillStyle=`rgba(0,229,255,${this.a})`; ctx.fill(); }
-}
-for(let i=0;i<70;i++) nodes.push(new Node());
-let frame=0;
-(function draw(){
-  ctx.clearRect(0,0,W,H);
-  for(let i=0;i<nodes.length;i++){
-    for(let j=i+1;j<nodes.length;j++){
-      const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, d=Math.sqrt(dx*dx+dy*dy);
-      if(d<150){ ctx.beginPath(); ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.strokeStyle=`rgba(0,229,255,${(1-d/150)*.1})`; ctx.lineWidth=.5; ctx.stroke(); }
-    }
-    nodes[i].update(); nodes[i].draw();
-  }
-  // scan beam
-  const sy=(frame*.4)%H;
-  const g=ctx.createLinearGradient(0,sy-60,0,sy+60);
-  g.addColorStop(0,'transparent'); g.addColorStop(.5,'rgba(0,229,255,0.025)'); g.addColorStop(1,'transparent');
-  ctx.fillStyle=g; ctx.fillRect(0,sy-60,W,120);
-  frame++; requestAnimationFrame(draw);
-})();
+/* ─────────── ICONS ─────────── */
+const IC={
+  chip:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>',
+  wifi:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 9a15 15 0 0 1 20 0M5 13a10 10 0 0 1 14 0M8.5 16.5a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>',
+  cloud:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 18a5 5 0 0 1-.6-9.96A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"/></svg>',
+  cube:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 2 9 5v10l-9 5-9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg>',
+  code:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/></svg>',
+  chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="m7 15 4-5 3 3 5-7"/></svg>',
+  arrow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  x:'<svg viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg>'
+};
 
-// ── SCROLL REVEAL ──
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-},{threshold:.06});
-document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+/* ─────────── DATA ─────────── */
+const STACK=[
+  {ic:'chip',en:'Industrial / OT',vi:'Công nghiệp / OT',tags:['SCADA','WinCC','TIA Portal','PLC S7-1200','S7-1500','Schneider','HMI']},
+  {ic:'wifi',en:'IoT / Protocols',vi:'IoT / Giao thức',tags:['MQTT','Modbus TCP','Modbus RTU','OPC UA','CoAP','LoRa','Sigfox']},
+  {ic:'cloud',en:'Cloud / Infra',vi:'Đám mây / Hạ tầng',tags:['Azure','AWS','VPN','VLAN','Fortinet','Cisco','TLS/SSL']},
+  {ic:'cube',en:'Power Platform',vi:'Power Platform',tags:['Power Apps','Power Automate','Power BI','SharePoint','Dataverse','Azure Functions']},
+  {ic:'code',en:'Programming',vi:'Lập trình',tags:['Python','C#','C++','ASP.NET','SQL Server','MySQL']},
+  {ic:'chart',en:'Web / Viz',vi:'Web / Trực quan',tags:['HTML/JS','Chart.js','REST API','Flask','Dashboard UI']}
+];
+const JOBS=[
+  {yr:'25',per:'2022 — 2025',en:'Service Team Leader',vi:'Trưởng nhóm Dịch vụ',co:['Viet An Environment — Central Region','Viet An Environment — Khu vực miền Trung'],
+   resp:[['Led technical operations for SCADA & communication systems across the Central Region','Dẫn dắt vận hành kỹ thuật hệ thống SCADA & truyền thông khu vực miền Trung'],['Consulting on industrial automation, IoT and communication solutions','Tư vấn giải pháp tự động hóa công nghiệp, IoT và truyền thông'],['Coordinated platform integration: iLotusLand & internal enterprise systems','Điều phối tích hợp nền tảng: iLotusLand & hệ thống nội bộ doanh nghiệp'],['System assessments, upgrades, and technical training for field teams','Đánh giá hệ thống, nâng cấp và đào tạo kỹ thuật cho nhóm hiện trường'],['Primary escalation point for critical system incidents','Điểm leo thang chính cho các sự cố hệ thống nghiêm trọng']],
+   imp:[['Improved system stability & incident response time significantly','Cải thiện đáng kể độ ổn định hệ thống & thời gian xử lý sự cố'],['Standardized technical processes, reducing team onboarding time ~40%','Chuẩn hóa quy trình kỹ thuật, giảm thời gian đào tạo nhân viên mới ~40%'],['Outstanding Employee Award — 2022, 2023, 2024','Giải Nhân viên Xuất sắc — 2022, 2023, 2024']],
+   tech:['SCADA','iLotusLand','MQTT','Modbus','SQL Server','Team Leadership']},
+  {yr:'22',per:'2021 — 2022',en:'IoT Network Engineer',vi:'Kỹ sư Mạng IoT',co:['iLotusLand Vietnam','iLotusLand Việt Nam'],
+   resp:[['Designed end-to-end IoT architectures: Devices → Gateway → Cloud','Thiết kế kiến trúc IoT đầu cuối: Thiết bị → Gateway → Đám mây'],['Implemented industrial protocols: MQTT, Modbus TCP, OPC UA, CoAP','Triển khai giao thức công nghiệp: MQTT, Modbus TCP, OPC UA, CoAP'],['Developed data collection systems, REST APIs and integration services','Phát triển hệ thống thu thập dữ liệu, REST API và dịch vụ tích hợp'],['Deployed AWS & Azure cloud infrastructure for IoT services','Triển khai hạ tầng đám mây AWS & Azure cho dịch vụ IoT'],['Network security implementation: VPN, Firewall, TLS/SSL','Triển khai bảo mật mạng: VPN, Firewall, TLS/SSL']],
+   imp:[['Scalable infrastructure supporting hundreds of concurrent industrial nodes','Hạ tầng có thể mở rộng hỗ trợ hàng trăm node công nghiệp đồng thời'],['Reduced data latency ~35%, improved communication reliability','Giảm độ trễ dữ liệu ~35%, nâng cao độ tin cậy truyền thông']],
+   tech:['MQTT','OPC UA','AWS IoT Core','Azure IoT Hub','CoAP','REST API','Fortinet']},
+  {yr:'21',per:'2017 — 2021',en:'SCADA & IIoT Engineer',vi:'Kỹ sư SCADA & IIoT',co:['Viet An Environment','Viet An Environment'],
+   resp:[['Developed & deployed SCADA systems: WinCC, TIA Portal','Phát triển & triển khai hệ thống SCADA: WinCC, TIA Portal'],['Programmed Siemens S7-1200/1500 PLCs and configured HMI panels','Lập trình PLC Siemens S7-1200/1500 và cấu hình màn hình HMI'],['Integrated IoT systems: MQTT, LoRa, Sigfox for remote monitoring','Tích hợp hệ thống IoT: MQTT, LoRa, Sigfox cho giám sát từ xa'],['Managed SQL databases, firewalls, and server infrastructure','Quản lý cơ sở dữ liệu SQL, tường lửa và hạ tầng máy chủ'],['Direct client engagement: Formosa, Samsung, Toyota, Vinamilk','Làm việc trực tiếp với khách hàng: Formosa, Samsung, Toyota, Vinamilk']],
+   imp:[['Operated & maintained 700+ stations across 150+ industrial facilities','Vận hành & bảo trì 700+ trạm tại 150+ cơ sở công nghiệp'],['Built foundational IoT & SCADA infrastructure as core service offering','Xây dựng nền tảng IoT & SCADA trở thành dịch vụ cốt lõi công ty'],['Outstanding Employee — 2019, 2020, 2021','Nhân viên Xuất sắc — 2019, 2020, 2021']],
+   tech:['WinCC','TIA Portal','S7-1500','LoRa','Sigfox','Modbus','SQL Server']}
+];
+const PROJ=[
+  {en:'ENVIDATA Monitoring',vi:'Quan trắc ENVIDATA',full:['Environmental Monitoring System (ENVIDATA)','Hệ thống Quan trắc Môi trường (ENVIDATA)'],sub:['500+ stations · Real-time · Compliance','500+ trạm · Thời gian thực · Tuân thủ'],illo:'env',
+   about:[['Real-time monitoring for 500+ environmental stations nationwide','Giám sát thời gian thực 500+ trạm quan trắc môi trường toàn quốc'],['Parameters: pH, COD, TSS, DO, Temperature, Flow rate','Thông số: pH, COD, TSS, DO, Nhiệt độ, Lưu lượng'],['Automated alerting for threshold violations & compliance reporting','Cảnh báo tự động khi vượt ngưỡng & báo cáo tuân thủ'],['Live Chart.js dashboards, data export to regulatory authorities','Dashboard Chart.js trực tiếp, xuất dữ liệu cho cơ quan quản lý']],
+   imp:[['National coverage: 500+ active monitoring stations','Phủ sóng toàn quốc: 500+ trạm quan trắc hoạt động'],['Environmental compliance rate improved across all client factories','Tỷ lệ tuân thủ môi trường được cải thiện tại tất cả nhà máy']],
+   tech:['HTML/JS','Chart.js','Modbus TCP','MQTT','SQL Server','Python']},
+  {en:'Power Platform Suite',vi:'Hệ thống Power Platform',full:['Power Platform Business System','Hệ thống Nghiệp vụ Power Platform'],sub:['Contract · Debt · KPI · Automation','Hợp đồng · Công nợ · KPI · Tự động hóa'],illo:'pp',
+   about:[['Contract lifecycle management from proposal to payment','Quản lý vòng đời hợp đồng từ đề xuất đến thanh toán'],['Debt & receivables tracking with automated follow-up workflows','Theo dõi công nợ & phải thu với quy trình nhắc nhở tự động'],['KPI dashboards for management decision-making','Dashboard KPI cho ban lãnh đạo ra quyết định'],['Teams notifications & SharePoint document integration','Thông báo Teams & tích hợp tài liệu SharePoint']],
+   imp:[['Eliminated manual tracking, reduced admin workload significantly','Loại bỏ theo dõi thủ công, giảm đáng kể khối lượng hành chính'],['Full visibility into business operations and project status','Tầm nhìn toàn diện về hoạt động kinh doanh và trạng thái dự án']],
+   tech:['Power Apps','Power Automate','Power BI','SharePoint','Dataverse','MS Teams']},
+  {en:'AI Vision Automation',vi:'Tự động hóa AI Vision',full:['AI Vision Automation Tool','Công cụ Tự động hóa AI Vision'],sub:['Python · OpenCV · Real-time detection','Python · OpenCV · Phát hiện thời gian thực'],illo:'ai',
+   about:[['Python-based computer vision for industrial quality inspection','Thị giác máy tính Python cho kiểm tra chất lượng công nghiệp'],['Real-time object detection & classification at 30 FPS','Phát hiện & phân loại đối tượng thời gian thực ở 30 FPS'],['Automated control signals to PLC based on detection results','Tín hiệu điều khiển tự động đến PLC dựa trên kết quả phát hiện'],['Alert system with notification for anomaly detection','Hệ thống cảnh báo với thông báo khi phát hiện bất thường']],
+   imp:[['Replaced manual visual inspection with automated AI detection','Thay thế kiểm tra thủ công bằng phát hiện AI tự động'],['97% detection accuracy, 18ms latency, 99% system uptime','Độ chính xác phát hiện 97%, độ trễ 18ms, uptime hệ thống 99%']],
+   tech:['Python','OpenCV','YOLOv8','NumPy','Real-time','PLC Integration']}
+];
+const AWARDS=[
+  {big:'2024',small:['award','giải'],en:'Innovation Employee of the Year',vi:'Nhân viên Sáng tạo của Năm',sub:['Viet An Environment','Viet An Environment'],
+   pts:[['Recognized for building breakthrough AI and automation tools that transformed field operations','Được ghi nhận vì xây dựng công cụ AI và tự động hóa đột phá, cải tiến hoạt động hiện trường'],['Led digital transformation initiatives across monitoring infrastructure','Dẫn dắt các sáng kiến chuyển đổi số trong hạ tầng quan trắc'],['Proposed and delivered internal tooling that reduced manual workload by >50%','Đề xuất và triển khai công cụ nội bộ giúp giảm khối lượng thủ công >50%']]},
+  {big:'5×',small:['in a row','liên tiếp'],en:'Outstanding Employee',vi:'Nhân viên Xuất sắc',sub:['2019 · 2020 · 2021 · 2022 · 2023 — 5 consecutive years','2019 · 2020 · 2021 · 2022 · 2023 — 5 năm liên tiếp'],
+   pts:[['5 consecutive years of recognition — among the highest in company history','5 năm liên tiếp được công nhận — thuộc hàng cao nhất trong lịch sử công ty'],['Praised for technical depth, problem-solving under pressure, and client satisfaction','Được đánh giá cao về chiều sâu kỹ thuật, giải quyết vấn đề dưới áp lực và sự hài lòng của khách hàng'],['Maintained high performance across SCADA, IoT, and team leadership roles','Duy trì hiệu suất cao trong các vai trò SCADA, IoT và lãnh đạo nhóm']]},
+  {big:'04',small:['enterprises','tập đoàn'],en:'Enterprise Client Delivery',vi:'Triển khai cho Khách hàng Doanh nghiệp',sub:['Formosa · Samsung · Toyota · Vinamilk','Formosa · Samsung · Toyota · Vinamilk'],
+   pts:[["Delivered full SCADA & IoT monitoring systems for Vietnam's largest manufacturing clients",'Triển khai hệ thống SCADA & IoT hoàn chỉnh cho các khách hàng sản xuất lớn nhất Việt Nam'],['Formosa Ha Tinh Steel — large-scale environmental monitoring compliance system','Formosa Hà Tĩnh Steel — hệ thống tuân thủ quan trắc môi trường quy mô lớn'],['Samsung, Toyota, Vinamilk — real-time process monitoring and EMS integration','Samsung, Toyota, Vinamilk — giám sát quy trình thời gian thực và tích hợp EMS']]}
+];
 
-// ── TOGGLE CARD ──
-function toggleCard(el){
-  const body = el.querySelector('.card-body');
-  const isOpen = el.classList.contains('open');
-  // close others in same list
-  const parent = el.parentElement;
-  parent.querySelectorAll('.exp-card.open,.proj-card-item.open,.ach-card-item.open').forEach(c=>{
-    if(c!==el){
-      c.classList.remove('open');
-      c.querySelector('.card-body').style.maxHeight='0';
-    }
+/* ─────────── ILLUSTRATIONS (theme-aware) ─────────── */
+const ILLO={
+env:`<svg class="illo" viewBox="0 0 400 250" fill="none" stroke="currentColor" stroke-width="1.2">
+  <rect x="10" y="10" width="380" height="230" rx="12" opacity=".25"/>
+  <text x="26" y="36" font-size="10" stroke="none" opacity=".6">ENVIDATA / LIVE</text>
+  <g class="a"><circle cx="360" cy="32" r="4" fill="currentColor" stroke="none"><animate attributeName="opacity" values="1;.2;1" dur="1.2s" repeatCount="indefinite"/></circle></g>
+  <g opacity=".12"><path d="M26 90h348M26 130h348M26 170h348M26 210h348"/></g>
+  <polyline class="a" stroke-width="2.4" points="26,170 60,150 94,160 128,120 162,135 196,100 230,112 264,80 298,96 332,70 374,82" stroke-dasharray="600" stroke-dashoffset="600"><animate attributeName="stroke-dashoffset" to="0" dur="2s" fill="freeze"/></polyline>
+  <polyline stroke-width="1.4" opacity=".55" points="26,195 60,185 94,192 128,170 162,180 196,160 230,168 264,150 298,158 332,140 374,148"/>
+  <polyline stroke-width="1.4" opacity=".3" points="26,215 60,210 94,214 128,200 162,206 196,196 230,200 264,188 298,194 332,182 374,186"/>
+  <g font-size="9" stroke="none"><text x="26" y="232" opacity=".5">pH · COD · TSS</text><text x="290" y="232" class="a">500 ONLINE</text></g>
+</svg>`,
+pp:`<svg class="illo" viewBox="0 0 400 250" fill="none" stroke="currentColor" stroke-width="1.2">
+  <g font-size="9" stroke="none">
+  <text x="30" y="52" opacity=".6">SHAREPOINT</text><text x="150" y="52" class="a">AUTOMATE</text><text x="275" y="52" opacity=".6">POWER BI</text></g>
+  <rect x="20" y="64" width="100" height="120" rx="10" opacity=".35"/>
+  <g opacity=".35"><path d="M34 90h70M34 110h52M34 130h62M34 150h44"/></g>
+  <rect class="a" x="146" y="64" width="110" height="120" rx="10"/>
+  <g class="a" font-size="8.5" stroke="none"><text x="158" y="92">▸ Trigger</text><text x="158" y="116">▸ Approve</text><text x="158" y="140">▸ Dataverse</text><text x="158" y="164">▸ Teams</text></g>
+  <rect x="268" y="64" width="116" height="120" rx="10" opacity=".35"/>
+  <g fill="currentColor" stroke="none" opacity=".6"><rect x="282" y="150" width="12" height="22"/><rect x="300" y="136" width="12" height="36"/><rect x="318" y="128" width="12" height="44"/></g>
+  <circle cx="357" cy="104" r="16" opacity=".2" stroke-width="6"/><path class="a" d="M357 88a16 16 0 1 1-14 24" stroke-width="6" stroke-linecap="round"/>
+  <path class="a" d="M120 124h26M256 124h12" stroke-dasharray="3 3"><animate attributeName="stroke-dashoffset" from="12" to="0" dur=".8s" repeatCount="indefinite"/></path>
+  <text x="200" y="222" text-anchor="middle" font-size="9" stroke="none" opacity=".5">CONTRACT · DEBT · KPI</text>
+</svg>`,
+ai:`<svg class="illo" viewBox="0 0 400 250" fill="none" stroke="currentColor" stroke-width="1.2">
+  <rect x="14" y="20" width="220" height="190" rx="12" opacity=".35"/>
+  <circle cx="90" cy="112" r="34" opacity=".25"/><rect x="150" y="90" width="52" height="52" rx="4" opacity=".25"/>
+  <g class="a" stroke-width="2"><path d="M50 70v-10h10M130 60h10v10M50 154v10h10M130 164h10v-10"/></g>
+  <rect class="a" x="50" y="46" width="62" height="12" fill="currentColor" stroke="none"/><text x="55" y="55" font-size="8" stroke="none" style="fill:var(--acc-ink)">OBJ 98%</text>
+  <rect x="144" y="84" width="64" height="64" stroke-dasharray="4 3" opacity=".7"/>
+  <line class="a" x1="14" x2="234" y1="20" y2="20" stroke-width="1.5"><animate attributeName="y1" values="24;206;24" dur="3s" repeatCount="indefinite"/><animate attributeName="y2" values="24;206;24" dur="3s" repeatCount="indefinite"/></line>
+  <g font-size="9" stroke="none"><text x="252" y="50" opacity=".6">PIPELINE</text>
+  <text x="252" y="80">OpenCV</text><text x="252" y="108">YOLOv8</text><text x="252" y="136" class="a">Detect</text><text x="252" y="164">→ PLC</text>
+  <text x="252" y="204" opacity=".5">30 FPS · 18ms</text></g>
+  <path d="M246 86v84" opacity=".3"/>
+</svg>`
+};
+
+/* ─────────── RENDER ─────────── */
+const li=a=>a.map(([e,v])=>`<li ${T(e,v)}>${e}</li>`).join('');
+const tags=a=>`<div class="tags">${a.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`;
+$('#bento').innerHTML=STACK.map((s,i)=>`
+  <article class="cell rv">
+    <div class="cell-top"><div class="cell-ic">${IC[s.ic]}</div><span class="mono">0${i+1} / 06</span></div>
+    <div><h3 ${T(s.en,s.vi)}>${s.en}</h3>${tags(s.tags)}</div>
+  </article>`).join('');
+$('#track').insertAdjacentHTML('beforeend',JOBS.map((j,i)=>`
+  <article class="job">
+    <div class="job-yr" aria-hidden="true">’${j.yr}</div>
+    <div class="job-top mono"><span class="per">${j.per}</span><span>0${i+1}</span></div>
+    <div><h3 ${T(j.en,j.vi)}>${j.en}</h3><div class="co mono" ${T(j.co[0],j.co[1])}>${j.co[0]}</div></div>
+    <div class="job-cols">
+      <div><h4 class="mono" ${T('Responsibilities','Trách nhiệm')}>Responsibilities</h4><ul>${li(j.resp)}</ul></div>
+      <div class="imp"><h4 class="mono" ${T('Impact','Kết quả')}>Impact</h4><ul>${li(j.imp)}</ul></div>
+    </div>
+    ${tags(j.tech)}
+  </article>`).join(''));
+$('#plist').innerHTML=PROJ.map((p,i)=>`
+  <button class="prow rv" data-p="${i}" data-cur="OPEN">
+    <span class="i mono">0${i+1}</span>
+    <span class="t" ${T(p.en,p.vi)}>${p.en}</span>
+    <span class="s mono" ${T(p.sub[0],p.sub[1])}>${p.sub[0]}</span>
+    <span class="ar">${IC.arrow}</span>
+  </button>`).join('');
+$('#stackc').innerHTML=AWARDS.map((a,i)=>`
+  <article class="award" style="--i:${i}">
+    <div class="big">${a.big}<br><small ${T(a.small[0],a.small[1])}>${a.small[0]}</small></div>
+    <div><div class="sub mono" ${T(a.sub[0],a.sub[1])}>${a.sub[0]}</div><h3 ${T(a.en,a.vi)}>${a.en}</h3><ul>${li(a.pts)}</ul></div>
+  </article>`).join('');
+
+/* ─────────── SPLIT HERO NAME ─────────── */
+$$('[data-split]').forEach((el,k)=>{
+  const nodes=[...el.childNodes]; el.innerHTML='';
+  let n=0;
+  nodes.forEach(nd=>{
+    if(nd.nodeType===3){[...nd.textContent].forEach(c=>{const s=document.createElement('span');s.className='ch';s.textContent=c===' '?' ':c;s.style.transitionDelay=(k*.12+n++*.05)+'s';el.appendChild(s)})}
+    else{nd.classList.add('ch');nd.style.transitionDelay=(k*.12+n++*.05)+'s';el.appendChild(nd)}
   });
-  if(isOpen){
-    el.classList.remove('open');
-    body.style.maxHeight='0';
-  } else {
-    el.classList.add('open');
-    body.style.maxHeight = body.scrollHeight+'px';
-    setTimeout(()=>{ body.style.maxHeight='none'; },600);
-  }
-}
+});
 
-// ── LANGUAGE ──
-let lang = 'en';
+/* ─────────── SCRUB TEXT (word split preserving markup) ─────────── */
+const scrub=$('#scrub');
+function splitWords(root){
+  const walk=n=>{[...n.childNodes].forEach(c=>{
+    if(c.nodeType===3){
+      const frag=document.createDocumentFragment();
+      c.textContent.split(/(\s+)/).forEach(p=>{
+        if(!p)return;
+        if(/^\s+$/.test(p))frag.appendChild(document.createTextNode(p));
+        else{const s=document.createElement('span');s.className='w';s.textContent=p;frag.appendChild(s)}
+      });
+      c.replaceWith(frag);
+    }else walk(c);
+  })};
+  walk(root);
+  return $$('.w',root);
+}
+let words=[];
+
+/* ─────────── I18N ─────────── */
+let lang='en', langV=0;
 function setLang(l){
-  lang = l;
-  document.getElementById('btnEN').classList.toggle('active', l==='en');
-  document.getElementById('btnVI').classList.toggle('active', l==='vi');
-  document.querySelectorAll('[data-en]').forEach(el=>{
-    const txt = el.getAttribute('data-'+l);
-    if(!txt) return;
-    // If it contains HTML tags, use innerHTML
-    if(txt.includes('<')) el.innerHTML = txt;
-    else el.textContent = txt;
+  lang=l; langV++;
+  document.documentElement.lang=l;
+  $('#seg').dataset.v=l;
+  $$('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
+  $$('[data-en]').forEach(el=>{const t=el.getAttribute('data-'+l);if(t==null)return; if(/[<&]/.test(t))el.innerHTML=t; else el.textContent=t;});
+  words=splitWords(scrub); onScroll();
+  try{localStorage.setItem('cv-lang',l)}catch(e){}
+  requestAnimationFrame(movePill); layoutHS();
+}
+$$('#seg button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.l)));
+
+/* ─────────── THEME ─────────── */
+const root=document.documentElement;
+function setTheme(t){root.dataset.theme=t;$('meta[name=theme-color]').content=t==='dark'?'#0c0c0b':'#efe9dd';try{localStorage.setItem('cv-theme',t)}catch(e){}}
+$('#theme').addEventListener('click',e=>{
+  const next=root.dataset.theme==='dark'?'light':'dark';
+  if(document.startViewTransition&&!RM){
+    const x=e.clientX||innerWidth-40,y=e.clientY||40,r=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+    const vt=document.startViewTransition(()=>setTheme(next));
+    vt.ready.then(()=>root.animate({clipPath:[`circle(0 at ${x}px ${y}px)`,`circle(${r}px at ${x}px ${y}px)`]},{duration:800,easing:'cubic-bezier(.16,1,.3,1)',pseudoElement:'::view-transition-new(root)'})).catch(()=>{});
+  }else setTheme(next);
+});
+
+/* ─────────── CLOCK ─────────── */
+const fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+const tick=()=>{$('#clock').textContent=fmt.format(new Date())+' GMT+7'};tick();setInterval(tick,1000);
+
+/* ─────────── LOADER ─────────── */
+const loader=$('#loader');
+function start(){document.body.classList.add('ready');$$('.hero .rv').forEach((el,i)=>setTimeout(()=>{el.classList.add('in');$$('[data-count]',el).forEach(countUp)},700+i*90));}
+if(RM){loader.classList.add('gone');start();}
+else{
+  const t0=performance.now(),D=1500;
+  (function step(t){
+    const p=clamp((t-t0)/D), e=1-Math.pow(1-p,3);
+    $('#lnum').textContent=String(Math.round(e*100)).padStart(3,'0');
+    $('#lbar').style.width=(e*100)+'%';
+    if(p<1)requestAnimationFrame(step);
+    else{loader.classList.add('done');setTimeout(start,250);setTimeout(()=>loader.classList.add('gone'),1300);}
+  })(t0);
+}
+
+/* ─────────── CURSOR + MAGNETIC ─────────── */
+const cur=$('#cur'),curf=$('#curf'),curl=$('#curl');
+let mx=innerWidth/2,my=innerHeight/2,fx=mx,fy=my;
+addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;if(FINE)cur.style.transform=`translate(${mx}px,${my}px)`},{passive:true});
+if(FINE){
+  document.body.classList.add('has-cur');
+  (function loop(){fx+=(mx-fx)*.16;fy+=(my-fy)*.16;curf.style.transform=`translate(${fx}px,${fy}px)`;requestAnimationFrame(loop)})();
+  document.addEventListener('pointerover',e=>{
+    const lab=e.target.closest('[data-cur]');
+    const lnk=e.target.closest('a,button,.tag');
+    curf.classList.toggle('hov',!!lab);
+    curf.classList.toggle('lnk',!lab&&!!lnk);
+    if(lab)curl.textContent=lab.dataset.cur;
+  });
+  $$('.mag').forEach(el=>{
+    el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.3}px,${(e.clientY-r.top-r.height/2)*.4}px)`});
+    el.addEventListener('pointerleave',()=>el.style.transform='');
+  });
+  $$('.cell').forEach(el=>{
+    el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      el.style.setProperty('--mx',x*100+'%');el.style.setProperty('--my',y*100+'%');
+      if(!RM)el.style.transform=`perspective(900px) rotateX(${(.5-y)*7}deg) rotateY(${(x-.5)*9}deg)`});
+    el.addEventListener('pointerleave',()=>el.style.transform='');
   });
 }
+
+/* ─────────── HERO OSCILLOSCOPE ─────────── */
+const cv=$('#wave'),cx=cv.getContext('2d'),hero=$('#hero');
+let W=0,H=0,DPR=1,hvis=true;
+function rs(){DPR=Math.min(devicePixelRatio||1,2);W=hero.clientWidth;H=hero.clientHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0)}
+rs();addEventListener('resize',rs);
+new IntersectionObserver(([e])=>hvis=e.isIntersecting).observe(hero);
+let hmx=-1e4,hmy=-1e4,amp=0;
+hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();hmx=e.clientX-r.left;hmy=e.clientY-r.top});
+hero.addEventListener('pointerleave',()=>{hmx=-1e4});
+const LINES=7;
+function draw(t){
+  if(hvis){
+    const cs=getComputedStyle(root),ink=cs.getPropertyValue('--ink').trim(),acc=cs.getPropertyValue('--acc').trim();
+    cx.clearRect(0,0,W,H);
+    // grid ticks
+    cx.globalAlpha=.08;cx.fillStyle=ink;
+    for(let x=0;x<W;x+=40)for(let y=0;y<H;y+=40)cx.fillRect(x,y,1,1);
+    const s=t*.001, base=H*.56;
+    for(let i=0;i<LINES;i++){
+      const isA=i===3;
+      cx.beginPath();
+      cx.globalAlpha=isA?.9:.10+i*.018;
+      cx.strokeStyle=isA?acc:ink;cx.lineWidth=isA?1.6:1;
+      const off=(i-LINES/2)*16;
+      for(let x=0;x<=W;x+=6){
+        const d=x-hmx, g=Math.exp(-(d*d)/(2*140*140))*Math.exp(-Math.pow((hmy-base)/(H*.6),2));
+        const y=base+off
+          +Math.sin(x*.006+s*(1+i*.12)+i)*14
+          +Math.sin(x*.017-s*1.7+i*.7)*6
+          +g*Math.sin(x*.05-s*8+i)*(46+i*4)*(isA?1.3:1)
+          +(RM?0:Math.sin(s*.7+i)*4);
+        x?cx.lineTo(x,y):cx.moveTo(x,y);
+      }
+      cx.stroke();
+    }
+    cx.globalAlpha=1;
+    // readout
+    if(hmx>0){cx.fillStyle=acc;cx.font='10px JetBrains Mono, monospace';cx.fillText(`CH-04  ${(hmx/W*100).toFixed(1)}Hz  ${((base-hmy)/10).toFixed(2)}mV`,hmx+14,hmy-14);cx.fillRect(hmx-3,hmy-3,6,6);}
+  }
+  if(!RM)requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+
+/* ─────────── REVEAL / COUNTERS / SCRAMBLE ─────────── */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const el=e.target; el.classList.add('in'); io.unobserve(el);
+  $$('[data-count]',el).forEach(countUp);
+  const sc=$('.scr',el); if(sc)scramble(sc);
+}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+$$('.rv,.kicker').forEach(el=>{if(!el.closest('.hero'))io.observe(el)});
+$$('.bento .cell,.stats .stat').forEach((el,i)=>el.style.transitionDelay=(i%3)*.08+'s');
+function countUp(el){
+  const to=+el.dataset.count,t0=performance.now(),D=1600;
+  (function f(t){const p=clamp((t-t0)/D);el.textContent=Math.round(to*(1-Math.pow(1-p,4)));if(p<1)requestAnimationFrame(f)})(t0);
+}
+const GL='!<>-_\\/[]{}—=+*^?#01';
+function scramble(el){
+  if(RM)return;
+  const v=langV,fin=el.textContent;let f=0;
+  (function s(){
+    if(v!==langV)return;
+    const out=[...fin].map((c,i)=>i<f/2||c===' '?c:GL[Math.random()*GL.length|0]).join('');
+    el.textContent=out;f++;
+    if(f/2<fin.length)requestAnimationFrame(s);else el.textContent=fin;
+  })();
+}
+
+/* ─────────── HORIZONTAL EXPERIENCE ─────────── */
+const hs=$('#experience'),track=$('#track');let hsDist=0,hsOn=false;
+function layoutHS(){
+  hsOn=innerWidth>900;
+  if(!hsOn){hs.style.height='';track.style.transform='';return}
+  hsDist=Math.max(0,track.scrollWidth-innerWidth);
+  hs.style.height=(innerHeight+hsDist)+'px';
+}
+addEventListener('resize',layoutHS);addEventListener('load',layoutHS);layoutHS();
+
+/* ─────────── MARQUEE ─────────── */
+const mqs=$$('.mq-row').map(r=>{r.innerHTML+=r.innerHTML+r.innerHTML;return{r,x:0,dir:+r.dataset.dir}});
+let lastY=scrollY,vel=0;
+
+/* ─────────── SCROLL LOOP ─────────── */
+const nav=$('#nav'),prog=$('#prog'),secs=['profile','stack','experience','projects','awards','contact'].map(id=>$('#'+id));
+let navY=0;
+function onScroll(){
+  const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
+  prog.style.transform=`scaleX(${max>0?y/max:0})`;
+  nav.classList.toggle('solid',y>40);
+  nav.classList.toggle('hide',y>navY&&y>innerHeight*.8&&!$('#dr').open);navY=y;
+  // scrub
+  if(words.length){
+    const r=scrub.getBoundingClientRect(),p=clamp((innerHeight*.85-r.top)/(r.height+innerHeight*.25));
+    const n=Math.round(p*words.length);
+    words.forEach((w,i)=>w.classList.toggle('lit',i<n||RM));
+  }
+  // horizontal
+  if(hsOn){
+    const p=clamp((y-hs.offsetTop)/(hsDist||1));
+    track.style.transform=`translate3d(${-p*hsDist}px,0,0)`;
+    $('#hsbar').style.transform=`scaleX(${p})`;
+    $('#hsnum').textContent=`0${Math.min(3,Math.floor(p*3.2)+1)} / 03`;
+  }
+  // active nav
+  let act=null;secs.forEach(s=>{if(s&&s.getBoundingClientRect().top<innerHeight*.45)act=s.id});
+  $$('#navl a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+act));
+  movePill();
+}
+function movePill(){
+  const a=$('#navl a.on'),pill=$('#pill');
+  if(!a){pill.style.opacity=0;return}
+  pill.style.opacity=1;pill.style.left=a.offsetLeft+'px';pill.style.width=a.offsetWidth+'px';
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+let savedTheme=null,savedLang=null;
+try{savedTheme=localStorage.getItem('cv-theme');savedLang=localStorage.getItem('cv-lang')}catch(e){}
+setTheme(savedTheme||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'));
+setLang(savedLang||((navigator.language||'').toLowerCase().startsWith('vi')?'vi':'en'));
+
+(function frame(){
+  const y=scrollY;vel+=((y-lastY)-vel)*.1;lastY=y;
+  if(!RM)mqs.forEach(m=>{
+    const w=m.r.scrollWidth/3;
+    m.x+=m.dir*(.6+Math.min(Math.abs(vel)*.35,14));
+    if(m.x<=-w)m.x+=w; if(m.x>0)m.x-=w;
+    m.r.style.transform=`translate3d(${m.x}px,0,0) skewX(${clamp(-vel*.25,-10,10)}deg)`;
+  });
+  requestAnimationFrame(frame);
+})();
+
+/* ─────────── PROJECT PREVIEW + DRAWER ─────────── */
+const pv=$('#pv'),pvin=$('#pvin');
+pvin.innerHTML=PROJ.map(p=>`<div>${ILLO[p.illo]}</div>`).join('');
+let px=0,py=0;
+$$('.prow').forEach(row=>{
+  row.addEventListener('pointerenter',()=>{if(!FINE)return;pv.classList.add('on');pvin.style.transform=`translateY(${-row.dataset.p*100}%)`});
+  row.addEventListener('pointerleave',()=>pv.classList.remove('on'));
+  row.addEventListener('click',()=>openDr(+row.dataset.p));
+});
+(function pl(){px+=(mx-px)*.12;py+=(my-py)*.12;pv.style.left=px+'px';pv.style.top=py+'px';requestAnimationFrame(pl)})();
+
+const dr=$('#dr');
+function openDr(i){
+  const p=PROJ[i];
+  $('#drin').innerHTML=`
+    <div class="dr-top mono"><span>0${i+1} / 03 — <span ${T('Project','Dự án')}>Project</span></span><button class="dr-x" id="drx" aria-label="Close" data-cur="CLOSE">${IC.x}</button></div>
+    <h3 id="drt" ${T(p.full[0],p.full[1])}>${p.full[0]}</h3>
+    <div class="mono" style="color:var(--acc)" ${T(p.sub[0],p.sub[1])}>${p.sub[0]}</div>
+    <div class="fig">${ILLO[p.illo]}</div>
+    <div><h4 class="mono" ${T('About','Mô tả')}>About</h4><ul>${li(p.about)}</ul></div>
+    <div class="imp"><h4 class="mono" ${T('Impact','Kết quả')}>Impact</h4><ul>${li(p.imp)}</ul></div>
+    ${tags(p.tech)}`;
+  setLang(lang);
+  dr.showModal();document.body.style.overflow='hidden';
+  $('#drx').addEventListener('click',closeDr);
+}
+function closeDr(){
+  if(RM){dr.close();return}
+  dr.classList.add('closing');
+  setTimeout(()=>{dr.classList.remove('closing');dr.close()},450);
+}
+dr.addEventListener('close',()=>{document.body.style.overflow=''});
+dr.addEventListener('cancel',e=>{e.preventDefault();closeDr()});
+dr.addEventListener('click',e=>{if(e.target===dr)closeDr()});
+
+/* ─────────── CONTACT ─────────── */
+function toast(m){$('#toastt').textContent=m;$('#toast').classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>$('#toast').classList.remove('on'),2200)}
+$('#copy').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText('gsnvbu@gmail.com');toast(lang==='vi'?'Đã sao chép email':'Email copied to clipboard')}
+  catch(e){location.href='mailto:gsnvbu@gmail.com'}
+});
+$('#print').addEventListener('click',()=>{words.forEach(w=>w.classList.add('lit'));print()});
+$('#totop').addEventListener('click',()=>scrollTo({top:0,behavior:RM?'auto':'smooth'}));
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=$(a.getAttribute('href'));if(!t)return;e.preventDefault();scrollTo({top:t.getBoundingClientRect().top+scrollY-(a.getAttribute('href')==='#top'?0:20),behavior:RM?'auto':'smooth'})}));
+})();
 </script>
 </body>
 </html>
