@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0c0c0b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Fraunces:ital,opsz,wght@1,9..144,300..600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ═════════════ TOKENS ═════════════ */
 :root{
@@ -16,21 +16,21 @@
   --ink:#f1ece2; --muted:#8f897e; --faint:#57534b;
   --line:rgba(241,236,226,.12); --line2:rgba(241,236,226,.06);
   --acc:#ff5b1f; --acc-ink:#0c0c0b; --live:#c8ff2e;
-  --f-d:'Bricolage Grotesque','Be Vietnam Pro',system-ui,sans-serif;
-  --f-b:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-d:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter','Helvetica Neue',Arial,sans-serif;
+  --f-b:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Helvetica Neue',Arial,sans-serif;
   /* type scale — fluid, ratio ≈1.25 (major third), min label 12px */
-  --fs-xs:12px; --fs-sm:14px;
-  --fs-base:clamp(16px,.96rem + .2vw,18px);
-  --fs-md:clamp(18px,1rem + .5vw,22px);
-  --fs-lg:clamp(22px,1.1rem + 1vw,30px);
-  --fs-xl:clamp(28px,1.2rem + 2vw,44px);
-  --fs-2xl:clamp(36px,1.4rem + 3.6vw,72px);
-  --fs-3xl:clamp(44px,1.6rem + 6vw,112px);
-  --fs-hero:clamp(64px,13vw,208px);
-  --lh-tight:1.02; --lh-snug:1.2; --lh-body:1.65;
-  --tr-tight:-.035em; --tr-label:.08em;
-  --f-s:'Fraunces',Georgia,serif;
-  --f-m:'JetBrains Mono',ui-monospace,monospace;
+  --fs-xs:13px; --fs-sm:15px;
+  --fs-base:17px;
+  --fs-md:clamp(19px,1rem + .4vw,21px);
+  --fs-lg:clamp(22px,1.1rem + .8vw,28px);
+  --fs-xl:clamp(28px,1.2rem + 1.6vw,40px);
+  --fs-2xl:clamp(32px,1.3rem + 2.6vw,56px);
+  --fs-3xl:clamp(40px,1.5rem + 4vw,80px);
+  --fs-hero:clamp(56px,10vw,150px);
+  --lh-tight:1.07; --lh-snug:1.2; --lh-body:1.5;
+  --tr-tight:-.022em; --tr-label:0;
+  --f-s:var(--f-d);
+  --f-m:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
   --ease:cubic-bezier(.16,1,.3,1);
   --gut:clamp(16px,4vw,56px);
 }
@@ -337,6 +337,76 @@ dialog.dr.closing{animation:drOut .5s var(--ease) forwards}
 /* magnetic */
 .mag{will-change:transform;transition:transform .6s var(--ease)}
 
+
+/* ═════════════ APPLE-STYLE TYPOGRAPHY LAYER ═════════════ */
+body{letter-spacing:-.011em;font-feature-settings:"kern","liga","calt"}
+.mono{font-family:var(--f-b);font-size:var(--fs-xs);font-weight:500;letter-spacing:0;text-transform:none}
+.serif{font-family:var(--f-d);font-style:normal;font-weight:inherit}
+h1,h2,h3,.h2,.name,.cta,.role,.scrub,.prow .t,.job h3,.award h3,.edu h3,.cell h3,.dr h3,.stat .v{font-family:var(--f-d);letter-spacing:var(--tr-tight)}
+/* section heading eyebrow like apple.com */
+.kicker{font-size:var(--fs-md);font-weight:600;color:var(--ink);gap:12px;margin-bottom:clamp(24px,4vw,48px)}
+.kicker .n{font-size:var(--fs-xs);font-weight:600;color:var(--acc);padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--acc) 14%,transparent)}
+.hs .kicker{color:var(--bg)}
+.hero-meta{font-size:var(--fs-sm)}
+.name{font-weight:700;letter-spacing:-.035em;line-height:1.02}
+.name .l1{font-weight:600;letter-spacing:-.02em;font-size:.4em;color:var(--muted);line-height:1.2;padding-left:.04em}
+.role{font-weight:600}
+.role .serif{font-weight:600}
+.h2{font-weight:700}
+.h2 .serif{font-weight:700;color:var(--muted)}
+.hs .h2 .serif{color:var(--acc)}
+.stat .v{font-weight:700}
+.stat .k{font-size:var(--fs-sm);color:var(--muted)}
+/* profile: fully readable, no dim words */
+.scrub{font-size:clamp(21px,1.1rem + 1vw,30px);font-weight:500;line-height:1.45;letter-spacing:-.015em;max-width:40ch;color:var(--ink)}
+.scrub .w{opacity:1!important}
+.scrub strong,.scrub .hi{font-family:inherit;font-style:normal;font-weight:600}
+.scrub strong .w{color:var(--ink)!important}
+.scrub .hi .w{color:var(--acc)!important}
+.chip-l{font-size:var(--fs-sm);align-items:baseline}
+.chip-l b{font-size:var(--fs-base);font-weight:500}
+/* marquee: solid, calm */
+.mq-row span{font-weight:700;letter-spacing:-.03em}
+.mq-row.b span{-webkit-text-stroke:0;color:var(--muted);font-style:normal;font-weight:600}
+/* stack cards */
+.cell h3{font-size:var(--fs-lg);font-weight:600}
+.tag{font-family:var(--f-b);font-size:var(--fs-xs);font-weight:500;padding:6px 12px}
+.stack-head p{font-size:var(--fs-md);line-height:1.45}
+/* experience: vertical, easy-to-read cards (no sideways scrolling) */
+.hs-sticky{position:static;height:auto;padding:clamp(64px,8vw,110px) 0 clamp(48px,6vw,80px);display:block}
+.hs-track{flex-direction:column;width:auto;transform:none!important;gap:16px}
+.hs-intro{width:auto;margin-bottom:12px}
+.hs-intro p{font-size:var(--fs-md);line-height:1.45}
+.hs-hint,.hs-bar,.hs-count{display:none}
+.job{width:auto;grid-template-rows:auto;padding:clamp(24px,3vw,44px)}
+.job-top .per{font-size:var(--fs-xs)}
+.job h3{font-size:var(--fs-xl);font-weight:700;max-width:none}
+.job .co{font-size:var(--fs-sm);margin-top:6px}
+.job-cols h4{font-size:var(--fs-sm);font-weight:600;color:color-mix(in srgb,var(--bg) 60%,transparent)}
+.job-cols ul{font-size:var(--fs-base);line-height:1.5}
+.job-yr{font-weight:700;opacity:.5}
+/* projects */
+.prow .t{font-size:var(--fs-2xl);font-weight:600}
+.prow .s{font-size:var(--fs-sm)}
+.dr h3{font-weight:700}
+.dr h4,.award .sub{font-size:var(--fs-sm);font-weight:600}
+.dr ul{font-size:var(--fs-base);line-height:1.5}
+/* awards */
+.award .big{font-weight:700;letter-spacing:-.04em}
+.award .big small{font-family:var(--f-d);font-style:normal;font-weight:600;font-size:.26em;letter-spacing:-.01em;opacity:.8}
+.award h3{font-weight:700}
+.award ul{font-size:var(--fs-base);line-height:1.5}
+/* education & contact */
+.edu h3{font-weight:700}
+.edu p{font-size:var(--fs-sm)}
+.edu .yr{font-weight:600;font-style:normal}
+.cta{font-weight:700;letter-spacing:-.04em;line-height:1.02;font-size:clamp(44px,8vw,120px)}
+.cta .serif{font-weight:700;color:var(--acc)}
+.btn{font-size:var(--fs-base);font-weight:500}
+.foot{font-size:var(--fs-sm)}
+.nav-links a{font-size:var(--fs-sm)}
+.seg button{font-family:var(--f-b);font-size:var(--fs-xs);font-weight:600}
+.loader-num{font-weight:700;letter-spacing:-.04em}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   .grain{display:none}
@@ -440,7 +510,7 @@ dialog.dr.closing{animation:drOut .5s var(--ease) forwards}
 
 <!-- ═════════ PROFILE ═════════ -->
 <section class="sec wrap" id="profile">
-  <div class="kicker mono rv"><span class="n">01</span><span class="scr" data-en="Profile" data-vi="Hồ sơ">Profile</span><span class="ln"></span><span>PROFILE.SYS</span></div>
+  <div class="kicker mono rv"><span class="n">01</span><span class="scr" data-en="Profile" data-vi="Hồ sơ">Profile</span><span class="ln"></span></div>
   <div class="about-grid">
     <aside class="about-side rv">
       <a class="chip-l mono" href="mailto:gsnvbu@gmail.com"><span>Email</span><b>gsnvbu@gmail.com</b></a>
@@ -455,7 +525,7 @@ dialog.dr.closing{animation:drOut .5s var(--ease) forwards}
 
 <!-- ═════════ STACK ═════════ -->
 <section class="sec wrap" id="stack" style="padding-top:0">
-  <div class="kicker mono rv"><span class="n">02</span><span class="scr" data-en="Technical Stack" data-vi="Kỹ năng kỹ thuật">Technical Stack</span><span class="ln"></span><span>STACK.CFG</span></div>
+  <div class="kicker mono rv"><span class="n">02</span><span class="scr" data-en="Technical Stack" data-vi="Kỹ năng kỹ thuật">Technical Stack</span><span class="ln"></span></div>
   <div class="stack-head">
     <h2 class="h2 rv"><span class="mask"><span data-en="From sensor" data-vi="Từ cảm biến">From sensor</span></span><span class="mask"><span><span class="serif" data-en="to cloud." data-vi="đến đám mây.">to cloud.</span></span></span></h2>
     <p class="rv" data-en="Six layers of the stack I design, deploy and operate — from field PLCs to executive dashboards." data-vi="Sáu lớp công nghệ tôi thiết kế, triển khai và vận hành — từ PLC hiện trường đến dashboard điều hành.">Six layers of the stack I design, deploy and operate — from field PLCs to executive dashboards.</p>
@@ -493,13 +563,13 @@ dialog.dr.closing{animation:drOut .5s var(--ease) forwards}
 
 <!-- ═════════ AWARDS ═════════ -->
 <section class="sec wrap" id="awards" style="padding-top:0">
-  <div class="kicker mono rv"><span class="n">05</span><span class="scr" data-en="Achievements" data-vi="Thành tích">Achievements</span><span class="ln"></span><span>HALL.OF.FAME</span></div>
+  <div class="kicker mono rv"><span class="n">05</span><span class="scr" data-en="Achievements" data-vi="Thành tích">Achievements</span><span class="ln"></span></div>
   <div class="stackc" id="stackc"></div>
 </section>
 
 <!-- ═════════ EDUCATION ═════════ -->
 <section class="wrap" id="education">
-  <div class="kicker mono rv"><span class="n">06</span><span class="scr" data-en="Education" data-vi="Học vấn">Education</span><span class="ln"></span><span>DEGREE.BIN</span></div>
+  <div class="kicker mono rv"><span class="n">06</span><span class="scr" data-en="Education" data-vi="Học vấn">Education</span><span class="ln"></span></div>
   <div class="edu rv">
     <div>
       <h3 data-en="Control Engineering &amp; Automation" data-vi="Kỹ thuật Điều khiển &amp; Tự động hóa">Control Engineering &amp; Automation</h3>
@@ -841,7 +911,7 @@ function scramble(el){
 /* ─────────── HORIZONTAL EXPERIENCE ─────────── */
 const hs=$('#experience'),track=$('#track');let hsDist=0,hsOn=false;
 function layoutHS(){
-  hsOn=innerWidth>900;
+  hsOn=false;
   if(!hsOn){hs.style.height='';track.style.transform='';return}
   hsDist=Math.max(0,track.scrollWidth-innerWidth);
   hs.style.height=(innerHeight+hsDist)+'px';
